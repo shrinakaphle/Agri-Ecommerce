@@ -1,5 +1,6 @@
-import img1 from "../assets/image.png";
-import img2 from "../assets/image.png";
+
+import ourexcellence from "../assets/ourexcellence.png"
+
 
 const Industry = () => {
   return (
@@ -19,8 +20,8 @@ const Industry = () => {
       </div>
 
       <div className="industry-images">
-        <img src={img1} alt="factory" />
-        <img src={img2} alt="production" />
+        <img src={ourexcellence} alt="factory" />
+       
       </div>
 
     </section>

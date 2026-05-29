@@ -11,7 +11,7 @@ import Industry from "../Component/Industry";
 const Home=() => {
     return(
         <div>
-            <Navbar/>
+          <Navbar/>
              <Hero/>
              <WhatWeDO/>
             <Industry/>

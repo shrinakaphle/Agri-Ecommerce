@@ -12,11 +12,20 @@ body {
 
 
 .navbar {
+   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 20px 60px;
   background: white;
+
+   transition:  all 0.3s ease;
+  z-index: 9999;
 }
 
 .logo h2 {
@@ -35,9 +44,20 @@ body {
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
+  cursor:pointer;
 }
 
 
+.navbar.scrolled {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background: white;
+  padding: 10px 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+   animation: drop 0.3s ease;
+}
 
 .hero {
   display: flex;
@@ -50,6 +70,7 @@ body {
    position: relative;
   width: 100%;
   overflow: hidden;
+  padding-top:80px;
 }
 
 .hero-left {
@@ -102,6 +123,11 @@ body {
   object-fit:cover;
   border-radius:20px;
   
+}
+.hero-slider {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
 
@@ -189,7 +215,8 @@ body {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
+  z-index:1;
 }
 
 .hero-content {
@@ -234,12 +261,14 @@ body {
 .whatwedo {
   padding: 100px 60px;
   background: white;
+  animation: bounceSection 1.8s ease;
 }
 
 /* TITLE */
 .whatwedo-title {
   text-align: center;
   margin-bottom: 80px;
+  animation :bounceTop 1.5s ease;
 }
 
 .whatwedo-title h2 {
@@ -269,8 +298,13 @@ body {
   background: #f8f9fa;
   border-radius: 25px;
   overflow: hidden;
+  animation:bounceCard 1.8s ease;
+  transition:transform 0.5s ease, box-shadow 0.5s ease;
 }
-
+.whatwedo-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 20px 40px rgpa(0,0,0,0.15);
+}
 /* IMAGE WRAPPER */
 .whatwedo-image {
   overflow: hidden;
@@ -323,8 +357,64 @@ body {
   color: #555;
 }
 
-/* RESPONSIVE */
+
+@keyframes bounceSection {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(100px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.03) translateY(-20px);
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+@keyframes bounceTop {
+
+  0% {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes bounceCard {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(100px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-15px);
+  }
+
+  70% {
+    transform: scale(0.97) translateY(10px);
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
 @media (max-width: 992px) {
+
   .whatwedo {
     padding: 60px 20px;
   }
@@ -337,6 +427,8 @@ body {
     font-size: 38px;
   }
 }
+
+/* Industry Section */
 .industry {
   display: flex;
   justify-content: space-between;
@@ -347,6 +439,7 @@ body {
 
 .industry-text {
   width: 50%;
+  animation:bounceIn 1.5s ease;
 }
 
 .industry-text h2 {
@@ -371,12 +464,91 @@ body {
   width: 50%;
   border-radius: 15px;
   object-fit: cover;
+  cursor:pointer;
+  transition:transofrm 0.8s ease,box-shadow 0,5s ease;
+}
+
+.industry-images img:hover{
+  transform:scale(1.08) translateY(-10PX);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+
+}
+/*Bounce coming animation*/
+@keyframes bounceIn {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-100px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(20px);
+  }
+
+  70% {
+    transform: scale(0.95) translateY(-10px);
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+  }
 }
 
 
 .footer {
-  background: #1b1b1b;
+  background: #023315;
   color: white;
-  padding: 40px;
+  padding: 80px 60px 30px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+/* each column */
+.footer-section {
+  flex: 1;
+  min-width: 220px;
+}
+
+.footer-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.footer-section p,
+.footer-section a {
+  color: #ccc;
+  font-size: 15px;
+  margin-bottom: 8px;
+  text-decoration: none;
+  display: block;
+}
+
+.footer-section a:hover {
+  color: white;
+}
+
+/* bottom line */
+.footer-bottom {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #686e68;
   text-align: center;
+  font-size: 14px;
+  color: #aaa;
+}
+@keyframes drop {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

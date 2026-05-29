@@ -1,5 +1,5 @@
 import{useState,useEffect} from "react";
-
+import Navbar from "../Component/Navbar";
 import slide1 from "../assets/welcomeimage.jpg";
 import slide2 from "../assets/products.png";
 import slide3 from "../assets/premiumfeed.png";
@@ -73,7 +73,7 @@ useEffect(() => {
 
   return (
     <div className="hero-slider">
-
+     <Navbar/>
       {/* BACKGROUND IMAGE */}
       <div
         className="hero-bg"
@@ -95,10 +95,10 @@ useEffect(() => {
         </button>
       </div>
 
-      {/* LEFT ARROW
+      LEFT ARROW
       <button className="arrow left" onClick={prevSlide}>
         ❮
-      </button> */}
+      </button>
 
       {/* RIGHT ARROW */}
       <button className="arrow right" onClick={nextSlide}>
