@@ -22,9 +22,10 @@ app.get("/",(req,res)=>{
 // app.get('/db-config',async(req,res)=>{
 //     const result = await pool.query()
 // })
-app.use("/category",categoryRoutes);
-app.use("/product",productRoutes);
-
+// app.use("/category",categoryRoutes);
+// app.use("/product",productRoutes);
+app.use("/api/categories",categoryRoutes);
+app.use("/uploads",express.static("uploads"));
 app.listen(PORT,()=>{
     console.log(`Server is running ${PORT} `);
 });

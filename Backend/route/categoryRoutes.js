@@ -1,41 +1,22 @@
-const express = require("express");
+const express= require("express");
+
 const router = express.Router();
 
-const upload = require("../middleware/uploads");
+const upload = require("../middleware/uploads" );
 
 const {
+  fetchCategories,
   addCategory,
-  getCategories,
-  getSingleCategory,
-  updateCategory,
-  deleteCategory
-} = require("../controller/categoryController");
+  editCategory,
+} = require( "../controller/categoryController"
+);
 
-router.post(
-  "/create",
-  upload.single("image"),
+router.get( "/", fetchCategories
+);
+
+router.post("/",upload.single("image"),
   addCategory
 );
-
-router.get(
-  "/all",
-  getCategories
-);
-
-router.get(
-  "/:id",
-  getSingleCategory
-);
-
-router.put(
-  "/update/:id",
-  upload.single("image"),
-  updateCategory
-);
-
-router.delete(
-  "/delete/:id",
-  deleteCategory
-);
+router.put("/:id",upload.single("image"),editCategory);
 
 module.exports = router;
