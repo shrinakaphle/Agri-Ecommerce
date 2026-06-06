@@ -65,7 +65,7 @@ body {
   justify-content: space-between;
   padding: 80px 60px;
   width:100%;
-  min-height:100vh;
+  min-height:200vh;
   overflow:hidden;
    position: relative;
   width: 100%;
@@ -95,15 +95,12 @@ body {
   display: flex;
   gap: 20px;
 }
-
-.explore-btn {
-  background: #2e7d32;
-  color: white;
-  border: none;
-  padding: 14px 24px;
-  border-radius: 8px;
-  font-size:16px;
-  cursor:pointer;
+.arrow{
+   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
 }
 
 .learn-btn {
@@ -118,10 +115,10 @@ body {
 .hero-right img {
   width:100%;
   border-radius: 20px;
-  max-width:650px;
-  height:650px;
+  max-width:400px;
+  height: 400px;
   object-fit:cover;
-  border-radius:20px;
+  border-radius:30px;
   
 }
 .hero-slider {
@@ -132,7 +129,7 @@ body {
 
 
 
-.categories {
+ .categories {
   padding: 60px;
 }
 
@@ -153,7 +150,7 @@ body {
 .category-card:hover{
   transform:translateY(-5px);
   box-shadow:0 10px 20px rgba(0,0,0,0.1);
-}
+} */
 
 
 
@@ -551,4 +548,95 @@ body {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 20px;
+}
+
+.category-card {
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s;
+  text-align:center;
+}
+
+.category-card:hover {
+  transform:
+    translateY(-8px);
+}
+
+.category-card img {
+  width: 60%;
+  height:300px;
+  object-fit: contain;
+}
+
+.category-card h3 {
+  /* 
+   */
+   margin-top:10px;
+   font-size:18px;
+}
+
+/* .explore-btn {
+  background: linear-gradient(135deg, #1b8f3a, #4caf50);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.explore-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5);
+}
+
+.explore-btn:active {
+  transform: translateY(0);
+}
+ */
+
+ .explore-btn {
+  background: #2e7d32;
+  color: white;
+  border: 2px solid #2e7d32;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.explore-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.2);
+  transition: 0.5s;
+}
+
+.explore-btn:hover::before {
+  left: 100%;
+}
+
+.explore-btn:hover {
+  background: #1b5e20;
+  transform: scale(1.05);
 }

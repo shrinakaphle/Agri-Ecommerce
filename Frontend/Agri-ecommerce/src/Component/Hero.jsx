@@ -1,7 +1,7 @@
 import{useState,useEffect} from "react";
 import Navbar from "../Component/Navbar";
 import slide1 from "../assets/welcomeimage.jpg";
-import slide2 from "../assets/products.png";
+import slide2 from "../assets/products1.png";
 import slide3 from "../assets/premiumfeed.png";
 import slide4 from "../assets/domestic.png";
 import slide5 from "../assets/delivery.png";
@@ -95,7 +95,7 @@ useEffect(() => {
         </button>
       </div>
 
-      LEFT ARROW
+      {/* LEFT ARROW */}
       <button className="arrow left" onClick={prevSlide}>
         ❮
       </button>
