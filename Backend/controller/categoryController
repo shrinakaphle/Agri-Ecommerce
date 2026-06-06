@@ -1,130 +1,65 @@
-const pool = require("../database/db");
+const {
+  getCategories,
+  createCategory,
+  updateCategory,
+  
+} = require("../model/CategoryModel");
 
-const addCategory = async(req,res)=>{
+const fetchCategories =
+  async (req, res) => {
 
- try{
+try {
 
-  const { name } = req.body;
+    const categories = await getCategories();
+     res.status(200).json(  categories);
 
-  const image = req.file.filename;
+    } catch (error) {
 
-  await pool.query(
-   `
-   INSERT INTO categories
-   (name,image)
-   VALUES($1,$2)
-   `,
-   [name,image]
-  );
+      res.status(500).json({
+        message:  error.message,
+      });
 
-  res.json({
-   success:true,
-   message:"Category Added"
-  });
-
- }catch(error){
-
-  res.status(500).json(error);
-
- }
-
+    }
 };
-const getCategories = async(req,res)=>{
 
- try{
+const addCategory =async (req, res) => {
+    try {
+      const { name } =req.body;
+      const image =  req.file
+          ? `http://localhost:5000/uploads/${req.file.filename}`
+          : null;
 
-  const result =
-  await pool.query(
-   "SELECT * FROM categories"
-  );
+      const category =
+        await createCategory( name, image );
 
-  res.json(result.rows);
+      res.status(201).json( category );
 
- }catch(error){
+    } catch (error) {
+      res.status(500).json({  message: error.message, });
 
-  res.status(500).json(error);
-
- }
-
+    }
 };
-const getSingleCategory = async(req,res)=>{
-
- try{
-
-  const result =
-  await pool.query(
-   `
-   SELECT *
-   FROM categories
-   WHERE id=$1
-   `,
-   [req.params.id]
-  );
-
-  res.json(result.rows[0]);
-
- }catch(error){
-
-  res.status(500).json(error);
-
- }
-
+const editCategory = async (req, res) => {
+    try {
+        console.log("BODY:",req.body);
+        console.log ("FILE:",req.file);
+        const { id } = req.params;
+        const { name } = req.body;
+        const image = req.file
+            ? `http://localhost:5000/uploads/${req.file.filename}`
+            : null;
+        const category = await updateCategory(id, name, image);
+        if (!category) {
+            return res.status(404).json({ message: "Category not found" });
+        }
+        res.status(200).json(category);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
-const updateCategory = async(req,res)=>{
 
- try{
-
-  const { name } = req.body;
-
-  const image = req.file.filename;;
-
-  await pool.query(
-   `
-   UPDATE categories
-   SET name=$1,image=$2
-   WHERE id=$3
-   `,
-   [name,image,req.params.id]
-  );
-
-  res.json({
-   message:"Category Updated"
-  });
-
- }catch(error){
-
-  res.status(500).json(error);
-
- }
-
-};
-const deleteCategory = async(req,res)=>{
-
- try{
-
-  await pool.query(
-   `
-   DELETE FROM categories
-   WHERE id=$1
-   `,
-   [req.params.id]
-  );
-
-  res.json({
-   message:"Category Deleted"
-  });
-
- }catch(error){
-
-  res.status(500).json(error);
-
- }
-
-};
 module.exports = {
- addCategory,
- getCategories,
- getSingleCategory,
- updateCategory,
- deleteCategory
+  fetchCategories,
+  addCategory,
+  editCategory,
 };
