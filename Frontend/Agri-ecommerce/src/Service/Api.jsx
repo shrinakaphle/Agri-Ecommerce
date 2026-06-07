@@ -11,3 +11,5 @@ const Api = axios.create({
 export const getAllCategories = () => {
   return Api.get("/api/categories");
 };
+
+export default Api;
