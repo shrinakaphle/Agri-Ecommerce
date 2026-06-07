@@ -11,7 +11,8 @@ const productRoutes =require("./route/productRoutes");
 
 app.use(cors());
 app.use(express.json());
-app.use("/uploads",express.static("uploads"))
+app.use("/uploads",express.static("uploads"));
+app.use("/api/products",productRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.get("/",(req,res)=>{ 
