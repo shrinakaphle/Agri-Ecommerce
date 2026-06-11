@@ -1,206 +1,547 @@
-// import {
-//   useEffect,
-//   useState,
-// } from "react";
-
-// import {
-//   useParams,
-//   useNavigate,
-// } from "react-router-dom";
-
-// import Api from "../Service/Api";
-
-// const Products = () => {
-
-//   const [products,
-//     setProducts] =
-//       useState([]);
-
-//   const { id } =
-//     useParams();
-
-//   const navigate =
-//     useNavigate();
-
-//   useEffect(() => {
-
-//     if (id) {
-
-//       Api.get(
-//         `/api/products/category/${id}`
-//       )
-//       .then((res) =>
-//         setProducts(
-//           res.data
-//         )
-//       );
-
-//     } else {
-
-//       Api.get(
-//         "/api/products"
-//       )
-//       .then((res) =>
-//         setProducts(
-//           res.data
-//         )
-//       );
-
-//     }
-
-//   }, [id]);
-
-//   return (
-    
-
-//     <div className="products-page">
-
-//       <div className="products-grid">
-
-//         {products.map(
-//           (product) => (
-
-//           <div
-//             key={product.id}
-//             className="product-card"
-//           >
-
-//             <img
-//               src={product.image}
-//               alt=""
-//             />
-
-//             <h3>
-//               {product.name}
-//             </h3>
-
-//             <p>
-//               Rs. {product.price}
-//             </p>
-
-//             <button
-//               onClick={() =>
-//                 navigate(
-//                   `/product/${product.id}`
-//                 )
-//               }
-//             >
-//               View Details
-//             </button>
-
-//           </div>
-
-//         ))}
-
-//       </div>
-
-//     </div>
-
-//   );
-// };
-
-// export default Products;
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Api from "../Service/Api";
+import {FaHeart,FaRegHeart,FaSearch} from "react-icons/fa";
+import "../CSS/Productpage.css";
+import cattlefeed from "../assets/cattlefeed1b.png";
+import Henfeed from "../assets/henbanner.jpg";
+import fishfeed from "../assets/fishffedb1.jpg";
+import Pigfeed from "../assets/pigfeedb1.jpg";
+
+import {
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+
+import {
+  getAllProducts,
+  getProductsByCategory,
+} from "../Service/Api";
+
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
 
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const navigate =
+    useNavigate();
+
+  const location =
+    useLocation();
+
+  const [products,
+    setProducts] =
+    useState([]);
+
+  const [search,
+    setSearch] =
+    useState("");
+
+  const [sort,
+    setSort] =
+    useState("latest");
+
+  const [priceRange,
+    setPriceRange] =
+    useState(5000);
+
+  const [stockOnly,
+    setStockOnly] =
+    useState(false);
+
+  const params =
+    new URLSearchParams(
+      location.search
+    );
+
+  const categoryId =
+    params.get(
+      "category"
+    );
+  const [wishlist, setWishlist] = useState([]);
+const [selectedCategories, setSelectedCategories] = useState([]);
+const [showOutOfStock, setShowOutOfStock] = useState(false);
+const toggleWishlist = (id) => {
+  setWishlist((prev) =>
+    prev.includes(id)
+      ? prev.filter((item) => item !== id)
+      : [...prev, id]
+  );
+};
+const categoryNames = {
+  1: "CATTLE FEED",
+  2: "HEN FEED",
+  3: "FISH FEED",
+  4: "PIG FEED",
+};
+
+const bannerTitle =
+  categoryNames[categoryId] || "ALL PRODUCTS";
+
+ 
+ 
+  const bannerImages={
+    "1": cattlefeed,
+     "2": Henfeed,
+     "3":fishfeed,
+     "4":Pigfeed,
+  }
+  const bannerImage =
+  bannerImages[categoryId] ||
+  cattlefeed;
 
   useEffect(() => {
-    if (id) {
-      Api.get(`/api/products/category/${id}`).then((res) =>
-        setProducts(res.data)
+
+    const fetchProducts =
+      async () => {
+
+        try {
+
+          let response;
+
+          if (
+            categoryId
+          ) {
+
+            response =
+              await getProductsByCategory(
+                categoryId
+              );
+
+          } else {
+
+            response =
+              await getAllProducts();
+
+          }
+
+          setProducts(
+            response.data
+          );
+
+        } catch (
+          error
+        ) {
+
+          console.log(
+            error
+          );
+
+        }
+      };
+
+    fetchProducts();
+
+  }, [categoryId]);
+
+  const filteredProducts =
+    products
+      .filter(
+        product =>
+          product.name
+            .toLowerCase()
+            .includes(
+              search.toLowerCase()
+            )
+      )
+      .filter(
+        product =>
+          Number(
+            product.price
+          ) <=
+          priceRange
+      )
+      .filter(
+        product =>
+          stockOnly
+            ? product.stock > 0
+            : true
+      )
+      .sort(
+        (
+          a,
+          b
+        ) => {
+
+          if (
+            sort ===
+            "low"
+          ) {
+            return (
+              Number(
+                a.price
+              ) -
+              Number(
+                b.price
+              )
+            );
+          }
+
+          if (
+            sort ===
+            "high"
+          ) {
+            return (
+              Number(
+                b.price
+              ) -
+              Number(
+                a.price
+              )
+            );
+          }
+
+          return (
+            b.id -
+            a.id
+          );
+        }
       );
-    } else {
-      Api.get("/api/products").then((res) => setProducts(res.data));
-    }
-  }, [id]);
-
-  // 🔍 SEARCH FILTER
-  const filteredProducts = products.filter((p) =>
-    p.name.toLowerCase().includes(search.toLowerCase())
-  );
-
-  // 📊 SORT LOGIC
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    if (sort === "low") return a.price - b.price;
-    if (sort === "high") return b.price - a.price;
-    return 0;
-  });
 
   return (
-    <div className="products-page">
 
-      {/* SIDEBAR */}
-      <div className="sidebar">
-        <h3>Filters</h3>
+    // <div className="products-page">
+    <div
+  className="products-page"
+  style={{
+    display: "block",
+    width: "100%",
+    maxWidth: "1400px",
+    margin: "0 auto"
+  }}
+>
+    
 
-        <div className="filter-group">
-          <h4>Animal Type</h4>
+      {/* Breadcrumb */}
 
-          <label><input type="checkbox" /> Cow/Buffalo</label>
-          <label><input type="checkbox" /> Pig</label>
-          <label><input type="checkbox" /> Fish</label>
-          <label><input type="checkbox" /> Poultry</label>
-        </div>
+      <div className="breadcrumb">
+
+        Home /
+
+        Products /
+
+        {
+          categoryId
+            ? "Category"
+            : "All Products"
+        }
+
       </div>
 
-      {/* MAIN CONTENT */}
-      <div className="products-content">
+      {/* Banner */}
 
-        {/* TOP BAR */}
-        <div className="products-top">
-          <h2>Our Feed Products</h2>
+      <div className="product-banner">
+      {/* <div
+  className="product-banner"
+  style={{
+    width: "100%",
+    height: "200px",
+    background: "green",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  }}
+> */}
+        <div className="banner-content">
 
-          {/* SEARCH */}
-          <input
-            type="text"
-            placeholder="Search Feed..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <h1>
 
-          {/* SORT */}
-          <select onChange={(e) => setSort(e.target.value)}>
-            <option value="">Latest</option>
-            <option value="low">Price Low To High</option>
-            <option value="high">Price High To Low</option>
-          </select>
+            {bannerTitle}
+          </h1>
+
+          <p>
+
+            Premium nutrition
+            for healthy livestock
+
+          </p>
+
         </div>
+<div className="banner-image">
+  <img
+  src={bannerImage}
+  alt="Category"/>
+</div>
+      </div>
 
-        {/* PRODUCTS GRID */}
-        <div className="products-grid">
-          {sortedProducts.map((product) => (
-            <div key={product.id} className="product-card">
+      {/* Layout */}
 
-              <img src={product.image} alt={product.name} />
+      <div className="products-layout">
 
-              <h3>{product.name}</h3>
+        {/* Sidebar */}
 
-              <p>Rs. {product.price}</p>
+        <aside className="sidebar">
 
-              <button
-                onClick={() =>
-                  navigate(`/product/${product.id}`)
+          <div className="filter-header">
+
+            <h2>
+              Filters
+            </h2>
+
+            <button
+              onClick={() => {
+
+                setSearch("");
+
+                setSort(
+                  "latest"
+                );
+
+                setPriceRange(
+                  5000
+                );
+
+                setStockOnly(
+                  false
+                );
+
+              }}
+            >
+              Clear All
+            </button>
+
+          </div>
+
+          <div className="filter-group">
+
+            <h4>
+              Categories
+            </h4>
+<label>
+  <input
+    type="checkbox"
+    // checked={selectedCategories.includes(1)}
+    checked = {categoryId === "1"}
+    onChange={() =>
+      navigate("/products?category=1")
+    }
+  />
+  Cattle Feed
+</label>
+
+<label>
+  <input
+    type="checkbox"
+      checked = {categoryId === "2"}
+    onChange={() =>
+      navigate("/products?category=2")
+    }
+  />
+  Poultry Feed
+</label>
+
+<label>
+  <input
+    type="checkbox"
+      checked = {categoryId === "3"}
+    onChange={() =>
+      navigate("/products?category=3")
+    }
+  />
+  Fish Feed
+</label>
+
+<label>
+  <input
+    type="checkbox"
+     checked = {categoryId === "4"}
+    onChange={() =>
+      navigate("/products?category=4")
+    }
+  />
+  Pig Feed
+</label>
+</div>
+           
+
+          <div className="filter-group">
+
+            <h4>
+              Price Range
+            </h4>
+
+            <input
+              type="range"
+              min="0"
+              max="5000"
+              value={
+                priceRange
+              }
+              onChange={
+                e =>
+                  setPriceRange(
+                    e.target
+                      .value
+                  )
+              }
+            />
+
+            <p>
+              Rs.0 -
+              Rs.
+              {
+                priceRange
+              }
+            </p>
+
+          </div>
+
+          <div className="filter-group">
+
+            <h4>
+              Availability
+            </h4>
+
+            <label>
+
+              <input
+                type="checkbox"
+                checked={
+                  stockOnly
                 }
-              >
-                View Details
-              </button>
+                onChange={() =>
+                  setStockOnly(
+                    !stockOnly
+                  )
+                }
+              />
 
-            </div>
-          ))}
-        </div>
+              In Stock
+
+            </label>
+            <label>
+              <input
+          type="checkbox"
+          checked={showOutOfStock}
+        onChange={() =>
+      setShowOutOfStock(!showOutOfStock)
+    }
+    />
+  
+     Out Of Stock
+            </label>
+
+          </div>
+
+        </aside>
+
+        {/* Content */}
+<div className ="products-content">
+  <div className = "top-bar">
+        <div className="search-box">
+
+  <FaSearch className="search-icon" />
+
+  <input
+    type="text"
+    placeholder="Search Products"
+    value={search}
+    onChange={(e) =>
+      setSearch(e.target.value)
+    }
+  />
+
+</div>
+
+            <select
+              value={sort}
+              onChange={
+                e =>
+                  setSort(
+                    e.target
+                      .value
+                  )
+              }
+            >
+
+              <option value="latest">
+                Latest
+              </option>
+
+              <option value="low">
+                Low To High
+              </option>
+
+              <option value="high">
+                High To Low
+              </option>
+
+            </select>
+
+          </div>
+
+          <div className="product-grid">
+
+            {
+  filteredProducts.map((product) => (
+
+    <div
+      key={product.id}
+      className="product-card"
+    >
+
+      <div
+        className="wishlist-icon"
+        onClick={() =>
+          toggleWishlist(product.id)
+        }
+      >
+        {wishlist.includes(product.id)
+          ? <FaHeart />
+          : <FaRegHeart />}
+      </div>
+
+      <img
+        src={product.image}
+        alt={product.name}
+        onClick={() =>
+          navigate(`/products/${product.id}`)
+        }
+      />
+
+      <h3
+        onClick={() =>
+          navigate(`/products/${product.id}`)
+        }
+      >
+        {product.name}
+      </h3>
+
+      <span className="stock-badge">
+        In Stock
+      </span>
+
+      <p className="price">
+        Rs. {product.price}
+      </p>
+
+      <div className="product-actions">
+
+        
+
+        <button
+          className="details-btn"
+          onClick={() =>
+            navigate(`/products/${product.id}`)
+          }
+        >
+          Product Details
+        </button>
 
       </div>
 
     </div>
+
+  ))
+}
+          </div>
+          </div>
+
+        </div>
+
+      </div>
+
+  
+
   );
+
 };
 
 export default Products;
+ 

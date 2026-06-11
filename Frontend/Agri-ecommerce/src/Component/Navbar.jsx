@@ -1,6 +1,9 @@
 //  import logo from "../assets/logo.jpeg";
 import {useEffect,useState} from "react";
+import{Link} from "react-router-dom";
+import{FaHeart,FaShoppingCart,FaBell} from "react-icons/fa";
 // import"../assets/Css/logo.css";
+
 const Navbar = ()=>{
     const[scrolled,setScrolled]=useState(false);
     useEffect(()=>{
@@ -25,16 +28,58 @@ const Navbar = ()=>{
         </div>
         </div>
 
-        <ul className="nav-links">
-            <li>Home</li>
-            <li>Products</li>
-            <li>About</li>
-            <li>Contacts</li>
-        </ul>
+       <ul className="nav-links">
+
+    <li>
+        <Link to="/">
+            Home
+        </Link>
+    </li>
+
+    <li>
+        <Link to="/products">
+            Products
+        </Link>
+    </li>
+
+    <li>
+        <Link to="/about">
+            About
+        </Link>
+    </li>
+
+    <li>
+        <Link to="/contact">
+            Contact
+        </Link>
+    </li>
+
+    <li>
+        <Link to ="/wishlist">
+        <FaHeart />
+        </Link>
+    </li>
+    
+        <li>
+            <Link to ="/cart">
+            <FaShoppingCart/></Link>
+        </li>
+        <li>
+            <Link to ="/notifications">
+            <FaBell />
+            </Link>
+        </li>
+    
+
+</ul>
+
         <button className= "login-btn">
             Login
         </button>
         </nav>
+
+        
     );
+    
 };
 export default Navbar;

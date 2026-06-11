@@ -8,8 +8,22 @@ const Api = axios.create({
 });
 
 // GET all categories
-export const getAllCategories = () => {
-  return Api.get("/api/categories");
+
+export const getAllProducts = () => {
+  return Api.get("/api/products");
 };
+
+export const getProductsByCategory = (id) => {
+  return Api.get(`/api/products/category/${id}`);
+};
+export const getAllCategories =()=>{
+  return Api.get(
+    "/api/categories"
+  );
+}
+  export const getProductById =(id) =>{
+    return Api.get(`api/products/${id}`);
+  };
+
 
 export default Api;

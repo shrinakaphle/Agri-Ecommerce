@@ -31,7 +31,10 @@ const navigate =useNavigate();
             />
 
             <h3>{category.name}</h3>
-            <button className ="explore-btn">Explore Products → </button>
+            <button className ="explore-btn"
+            onClick={()=>
+              navigate(`/products?category=${category.id}`)
+            }>Explore Products → </button>
 
           </div>
         ))}

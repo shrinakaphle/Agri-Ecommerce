@@ -1,4 +1,5 @@
 import{useState,useEffect} from "react";
+import{useNavigate} from "react-router-dom";
 import Navbar from "../Component/Navbar";
 import slide1 from "../assets/welcomeimage.jpg";
 import slide2 from "../assets/products1.png";
@@ -42,6 +43,7 @@ import "../index.css";
     },
   ];
   const Hero =()=>{
+    const navigate =useNavigate();
 
   const [current, setCurrent] = useState(0);
 
@@ -81,7 +83,7 @@ useEffect(() => {
           backgroundImage: `url(${slides[current].image})`,
         }}
       ></div>
-
+      
       {/* DARK OVERLAY */}
       <div className="overlay"></div>
 
@@ -91,7 +93,9 @@ useEffect(() => {
         <p>{slides[current].desc}</p>
 
         <button className="hero-btn">
+           onClick={() => navigate ("/products")}
          Contact Us
+        
         </button>
       </div>
 
