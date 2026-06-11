@@ -8,7 +8,8 @@ const createProduct = async (
   image,
   ingredients,
   feedingGuide,
-  categoryId
+  categoryId,
+  stock,
 ) => {
   const result = await pool.query(
     `
@@ -20,9 +21,11 @@ const createProduct = async (
       image,
       ingredients,
       feeding_guide,
-      category_id
+      category_id,
+      stock
+
     )
-    VALUES($1,$2,$3,$4,$5,$6,$7)
+    VALUES($1,$2,$3,$4,$5,$6,$7,$8)
     RETURNING *
     `,
     [
@@ -33,6 +36,7 @@ const createProduct = async (
       ingredients,
       feedingGuide,
       categoryId,
+      stock
     ]
   );
 
@@ -87,7 +91,8 @@ const updateProduct = async (
   image,
   ingredients,
   feedingGuide,
-  categoryId
+  categoryId,
+  stock
 ) => {
   const result = await pool.query(
     `
@@ -100,7 +105,8 @@ const updateProduct = async (
       ingredients = $5,
       feeding_guide = $6,
       category_id = $7
-    WHERE id = $8
+      stock =$8
+    WHERE id = $9
     RETURNING *
     `,
     [
@@ -112,6 +118,7 @@ const updateProduct = async (
       feedingGuide,
       categoryId,
       id,
+      stock,
     ]
   );
 
