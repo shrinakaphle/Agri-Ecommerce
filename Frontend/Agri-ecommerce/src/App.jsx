@@ -1,22 +1,47 @@
 // 
+// 
 import { Routes, Route } from "react-router-dom";
+
+import Navbar from "./Component/Navbar";
 
 import Home from "./pages/Home";
 import Products from "./Component/Product";
 import ProductDetails from "./Component/ProductDetails";
+import Wishlist from "./Component/Whishlist";
+// import "./Component/ About"
+// contact
 
 const App = () => {
   return (
-    <Routes>
-      {/* Home */}
-      <Route path="/" element={<Home />} />
+    <>
+      <Navbar />
 
-      {/* Products list */}
-      <Route path="/products" element={<Products />} />
+      <Routes>
 
-      {/* Single product details */}
-      <Route path="/products/:id" element={<ProductDetails />} />
-    </Routes>
+        {/* Home */}
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
+        {/* Products */}
+        <Route
+          path="/products"
+          element={<Products />}
+        />
+
+        {/* Product Details */}
+        <Route
+          path="/products/:id"
+          element={<ProductDetails />}
+        />
+        <Route
+  path="/wishlist"
+  element={<Wishlist />}
+/>
+
+      </Routes>
+    </>
   );
 };
 
