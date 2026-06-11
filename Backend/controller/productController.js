@@ -210,6 +210,7 @@ const addProduct = async (req, res) => {
       ingredients,
       feeding_guide,
       category_id,
+      stock,
     } = req.body;
 
     const image = req.file
@@ -223,7 +224,8 @@ const addProduct = async (req, res) => {
       image,
       ingredients,
       feeding_guide,
-      category_id
+      category_id,
+      stock
     );
 
     res.status(201).json({
@@ -260,6 +262,7 @@ const fetchProducts = async (req, res) => {
 // =========================
 const fetchProductsByCategory = async (req, res) => {
   try {
+    const {id} = req.params;
     const products = await getProductsByCategory(req.params.id);
 
     res.status(200).json(products);
@@ -318,6 +321,7 @@ const editProduct = async (req, res) => {
       ingredients,
       feeding_guide,
       category_id,
+      stock,
     } = req.body;
 
     const image = req.file
@@ -332,7 +336,8 @@ const editProduct = async (req, res) => {
       image,
       ingredients,
       feeding_guide,
-      category_id
+      category_id,
+      stock
     );
 
     res.status(200).json({
