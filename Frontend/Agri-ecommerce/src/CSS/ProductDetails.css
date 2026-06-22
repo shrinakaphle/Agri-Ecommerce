@@ -110,40 +110,59 @@
 
 /* BUTTONS */
 
+
+ .action-buttons{
+  display:flex;
+  gap:15px;
+  margin-top:25px;
+}
+
+.addtocart-btn,
 .buy-btn{
-  width:100%;
-  background:#1f7a35;
-  color:#fff;
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  padding:14px 20px;
   border:none;
-  padding:14px;
   border-radius:8px;
+
   font-size:16px;
   font-weight:600;
+
   cursor:pointer;
-  margin-bottom:10px;
   transition:0.3s;
+}
+
+/* Add To Cart */
+
+.addtocart-btn{
+  background:#ffffff;
+  color:#1f7a35;
+  border:2px solid #1f7a35;
+}
+
+.addtocart-btn:hover{
+  background:#1f7a35;
+  color:white;
+}
+
+/* Buy Now */
+
+.buy-btn{
+  background:#1f7a35;
+  color:white;
 }
 
 .buy-btn:hover{
   background:#166534;
 }
 
-.wishlist-btn{
-  width:100%;
-  background:#fff;
-  color:#1f7a35;
-  border:1px solid #1f7a35;
-  padding:14px;
-  border-radius:8px;
-  font-size:16px;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.wishlist-btn:hover{
-  background:#1f7a35;
-  color:#fff;
+.addtocart-btn svg,
+.buy-btn svg{
+  font-size:18px;
 }
 
 /* MOBILE */

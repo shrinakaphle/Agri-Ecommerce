@@ -1,0 +1,177 @@
+/* ======================
+   Wishlist Page
+====================== */
+
+.wishlist-page{
+  padding:100px;
+  background:#f5f5f5;
+  min-height:100vh;
+}
+
+.wishlist-page h2{
+  margin-bottom:25px;
+  font-size:24px;
+  font-weight:700;
+  color:#222;
+}
+
+/* ======================
+   Layout
+====================== */
+
+.wishlist-content{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:25px;
+}
+
+/* ======================
+   Wishlist Products
+====================== */
+
+.wishlist-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:20px;
+}
+
+.wishlist-card{
+  background:white;
+  border-radius:10px;
+  padding:15px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  position:relative;
+  transition:0.3s;
+}
+
+.wishlist-card:hover{
+  transform:translateY(-5px);
+}
+
+.wishlist-card img{
+  width:100%;
+  height:150px;
+  object-fit:contain;
+}
+
+/* Heart */
+
+.remove-heart{
+  position:absolute;
+  top:10px;
+  right:10px;
+  color:red;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* Product Name */
+
+.wishlist-card h4{
+  margin-top:12px;
+  font-size:15px;
+  color:#222;
+}
+
+.wishlist-card p{
+  margin:8px 0;
+  font-weight:600;
+  color:#1f7a35;
+}
+
+/* Add To Cart */
+
+.wishlist-card button{
+  width:100%;
+  padding:10px;
+
+  border:none;
+  border-radius:6px;
+
+  background:#1f7a35;
+  color:white;
+
+  font-size:14px;
+  font-weight:600;
+
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.wishlist-card button:hover{
+  background:#166534;
+}
+
+/* ======================
+   Recommended Products
+====================== */
+
+.recommend-box{
+  background:white;
+  border-radius:10px;
+  padding:15px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.recommend-box h3{
+  margin-bottom:15px;
+  font-size:18px;
+}
+
+.recommend-item{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+  align-items:center;
+}
+
+.recommend-item img{
+  width:70px;
+  height:70px;
+  object-fit:contain;
+}
+
+.recommend-info h5{
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+.recommend-info p{
+  color:#1f7a35;
+  font-weight:600;
+}
+
+.recommend-info button{
+  margin-top:5px;
+
+  border:none;
+  padding:6px 12px;
+
+  background:#1f7a35;
+  color:white;
+
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/* ======================
+   Responsive
+====================== */
+
+@media(max-width:768px){
+
+  .wishlist-content{
+    grid-template-columns:1fr;
+  }
+
+}
+.wishlist-heart{
+  position:absolute;
+  top:12px;
+  right:12px;
+
+  color:red;
+  font-size:22px;
+
+  cursor:pointer;
+}

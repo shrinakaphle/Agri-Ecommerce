@@ -8,8 +8,11 @@ import Home from "./pages/Home";
 import Products from "./Component/Product";
 import ProductDetails from "./Component/ProductDetails";
 import Wishlist from "./Component/Whishlist";
-// import "./Component/ About"
-// contact
+import Register from "./Component/Register";
+import Login from "./Component/Login";
+import Profile from "./Component/Profile";
+import EditProfile from "./Component/EditProfile";
+import Orders from "./Component/Orders";
 
 const App = () => {
   return (
@@ -39,6 +42,17 @@ const App = () => {
   path="/wishlist"
   element={<Wishlist />}
 />
+<Route
+path="/register"
+element={<Register/>}
+/>
+<Route path ="/login"
+element ={<Login />}
+/>
+<Route path="/profile" element={<Profile />} />
+<Route path="/edit-Profile" element={<EditProfile />} />
+<Route path="/orders" element={<Orders />} />
+
 
       </Routes>
     </>

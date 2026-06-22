@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 import { getProductById } from "../Service/Api";
 import "../CSS/ProductDetails.css";
+import{FaShoppingCart} from "react-icons/fa";
+import{FaBolt} from "react-icons/fa";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -26,13 +28,28 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
+  const checkLogin = () => {
+
+  const token =
+    localStorage.getItem("token");
+
+  if (!token) {
+
+    setShowPopup(true);
+    return false;
+
+  }
+
+  return true;
+};
+
   if (!product) {
     return <h2>Loading...</h2>;
   }
 
   return (
     <>
-      <Navbar />
+    
 
       <div className="product-details-page">
 
@@ -170,31 +187,39 @@ const ProductDetails = () => {
   </div>
 
 </div>
-            {/* Buttons */}
+            
 
-            <button
-              className="buy-btn"
-              onClick={() => {
-                const token =
-                  localStorage.getItem("token");
+<div className="action-buttons">
 
-                if (!token) {
-                  setShowPopup(true);
-                  return;
-                }
+  <button
+    className="addtocart-btn"
+    onClick={() => {
 
-                navigate("/checkout");
-              }}
-            >
-              Buy Now
-            </button>
+    if (!checkLogin())
+      return;
 
-            <button
-              className="wishlist-btn"
-            >
-              Add To Wishlist
-            </button>
+    // Add To Cart API later
 
+  }}
+  >
+    <FaShoppingCart />
+    Add To Cart
+  </button>
+
+  <button
+    className="buy-btn"
+    onClick={() => {
+     if(!checkLogin())
+      return;
+
+      navigate("/checkout");
+    }}
+  >
+    <FaBolt />
+    Buy Now
+  </button>
+
+</div>
           </div>
 
         </div>
@@ -207,11 +232,11 @@ const ProductDetails = () => {
     <div className="popup-box">
 
       <h3>
-        Please Login First
+         Login Required
       </h3>
 
       <p>
-        You must login before purchasing products.
+        Please login first to continue shopping.
       </p>
 
       <button
@@ -220,7 +245,7 @@ const ProductDetails = () => {
           navigate("/login")
         }
       >
-        Login
+        Login 
       </button>
 
       <button
@@ -229,7 +254,7 @@ const ProductDetails = () => {
           setShowPopup(false)
         }
       >
-        Close
+        Cancel
       </button>
 
     </div>

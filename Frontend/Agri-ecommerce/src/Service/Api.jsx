@@ -24,6 +24,13 @@ export const getAllCategories =()=>{
   export const getProductById =(id) =>{
     return Api.get(`api/products/${id}`);
   };
+  export const registerUser = (data) =>{
+    return Api.post("/api/user/create", data);
+  }
+export const loginUser= (data) =>{
+  return Api.post("/api/user/login",data);
+};
+
 
 
 export default Api;

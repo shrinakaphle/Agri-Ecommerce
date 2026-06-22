@@ -17,6 +17,7 @@ import {
 } from "../Service/Api";
 
 
+
 const Products = () => {
 
   const navigate =
@@ -57,13 +58,59 @@ const Products = () => {
   const [wishlist, setWishlist] = useState([]);
 const [selectedCategories, setSelectedCategories] = useState([]);
 const [showOutOfStock, setShowOutOfStock] = useState(false);
-const toggleWishlist = (id) => {
-  setWishlist((prev) =>
-    prev.includes(id)
-      ? prev.filter((item) => item !== id)
-      : [...prev, id]
+const toggleWishlist = (product) => {
+
+  let wishlist =
+    JSON.parse(
+      localStorage.getItem("wishlist")
+    ) || [];
+
+  const exists =
+    wishlist.find(
+      (item) => item.id === product.id
+    );
+
+  if (exists) {
+
+    wishlist = wishlist.filter(
+      (item) => item.id !== product.id
+    );
+
+  } else {
+
+    wishlist.push(product);
+
+  }
+
+  localStorage.setItem(
+    "wishlist",
+    JSON.stringify(wishlist)
+  );
+
+  setWishlist(
+    wishlist.map(
+      (item) => item.id
+    )
+  );
+
+  window.dispatchEvent(
+    new Event("wishlistUpdated")
   );
 };
+useEffect(() => {
+
+  const savedWishlist =
+    JSON.parse(
+      localStorage.getItem("wishlist")
+    ) || [];
+
+  setWishlist(
+    savedWishlist.map(
+      (item) => item.id
+    )
+  );
+
+}, []);
 const categoryNames = {
   1: "CATTLE FEED",
   2: "HEN FEED",
@@ -479,7 +526,7 @@ const bannerTitle =
       <div
         className="wishlist-icon"
         onClick={() =>
-          toggleWishlist(product.id)
+          toggleWishlist(product)
         }
       >
         {wishlist.includes(product.id)
