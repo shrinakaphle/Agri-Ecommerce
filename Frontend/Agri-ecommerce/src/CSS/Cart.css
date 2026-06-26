@@ -1,0 +1,150 @@
+.cart-page{
+  max-width:1200px;
+  margin:auto;
+
+  /* IMPORTANT FIX: navbar overlap */
+  padding:120px 20px 40px;
+}
+
+/* TOP BAR */
+.cart-top{
+  margin-bottom:25px;
+}
+
+.continue-shopping{
+  background:none;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+  color:#1f7a35;
+  cursor:pointer;
+}
+
+/* MAIN LAYOUT */
+.cart-layout{
+  display:flex;
+  gap:25px;
+  align-items:flex-start;
+}
+
+/* LEFT SIDE */
+.cart-left{
+  flex:2;
+}
+
+/* TABLE */
+.cart-table{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 3px 15px rgba(0,0,0,0.08);
+}
+
+/* HEADER + ROW */
+.table-header,
+.table-row{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr;
+  padding:15px;
+  align-items:center;
+}
+
+.table-header{
+  background:#f4f4f4;
+  font-weight:700;
+}
+
+.table-row{
+  border-top:1px solid #eee;
+}
+
+/* PRODUCT CELL */
+.product-cell{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.product-cell img{
+  width:60px;
+  height:60px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+/* QTY BUTTONS */
+.qty-box{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.qty-box button{
+  width:28px;
+  height:28px;
+  border:none;
+  background:#1f7a35;
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* REMOVE */
+.remove-btn{
+  background:#dc2626;
+  color:#fff;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* RIGHT SUMMARY */
+.cart-right{
+  flex:1;
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 3px 15px rgba(0,0,0,0.08);
+
+  position:sticky;
+  top:120px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  margin:12px 0;
+}
+
+.total-row{
+  font-size:18px;
+  font-weight:700;
+}
+
+.checkout-btn{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:none;
+  background:#1f7a35;
+  color:#fff;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* EMPTY CART */
+.empty-cart{
+  text-align:center;
+  padding:80px 0;
+}
+
+.empty-cart button{
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  background:#1f7a35;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}

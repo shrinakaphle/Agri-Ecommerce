@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "../CSS/EditProfile.css";
 
 const EditProfile = () => {
@@ -48,7 +49,9 @@ const EditProfile = () => {
           JSON.stringify(data.user)
         );
 
-        alert("Profile Updated Successfully");
+        toast.success(
+  "Profile Updated Successfully!"
+);
 
         navigate("/profile");
       } else {
@@ -57,7 +60,9 @@ const EditProfile = () => {
 
     } catch (error) {
       console.log(error);
-      alert("Update Failed");
+      toast.error(
+        "Update Failed!"
+);
     }
   };
 

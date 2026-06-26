@@ -5,6 +5,7 @@ import { getProductById } from "../Service/Api";
 import "../CSS/ProductDetails.css";
 import{FaShoppingCart} from "react-icons/fa";
 import{FaBolt} from "react-icons/fa";
+import {toast} from "react-toastify";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -27,8 +28,11 @@ const ProductDetails = () => {
 
     fetchProduct();
   }, [id]);
-
+const user = JSON.parse(
+  localStorage.getItem("user")
+);
   const checkLogin = () => {
+    
 
   const token =
     localStorage.getItem("token");
@@ -41,6 +45,58 @@ const ProductDetails = () => {
   }
 
   return true;
+};
+const handleAddToCart = async () => {
+
+  if (!checkLogin()) return;
+
+  try {
+
+    const res = await fetch(
+      "http://localhost:5000/api/cart/add",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+          user_id: user.id,
+          product_id: product.id,
+          quantity: quantity,
+          weight: selectedWeight
+        })
+      }
+    );
+
+    const data =
+      await res.json();
+
+    if (res.ok) {
+
+      toast.success(
+        "Added To Cart Successfully"
+      );
+
+    } else {
+
+      toast.error(
+        data.message
+      );
+
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+    toast.error(
+      "Failed To Add Cart"
+    );
+
+  }
 };
 
   if (!product) {
@@ -190,18 +246,11 @@ const ProductDetails = () => {
             
 
 <div className="action-buttons">
-
-  <button
-    className="addtocart-btn"
-    onClick={() => {
-
-    if (!checkLogin())
-      return;
-
-    // Add To Cart API later
-
-  }}
-  >
+<button
+  className="addtocart-btn"
+  onClick={handleAddToCart}
+>
+  
     <FaShoppingCart />
     Add To Cart
   </button>
@@ -211,9 +260,16 @@ const ProductDetails = () => {
     onClick={() => {
      if(!checkLogin())
       return;
-
-      navigate("/checkout");
-    }}
+navigate("/checkout",{
+    state:{
+      buyNow:true,
+      product:product,
+      quantity:quantity,
+      weight:selectedWeight
+    }
+      
+    });
+  }}
   >
     <FaBolt />
     Buy Now

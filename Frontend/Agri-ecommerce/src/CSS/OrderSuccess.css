@@ -1,0 +1,155 @@
+.success-page{
+
+min-height:80vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:60px;
+
+background:#f7f8fa;
+
+}
+
+.success-card{
+
+width:600px;
+
+background:white;
+
+padding:50px;
+
+border-radius:18px;
+
+text-align:center;
+
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.success-icon{
+
+font-size:90px;
+
+color:#198754;
+
+margin-bottom:25px;
+
+}
+
+.success-card h1{
+
+font-size:32px;
+
+margin-bottom:15px;
+
+}
+
+.success-card p{
+
+color:#666;
+
+font-size:17px;
+
+margin-bottom:35px;
+
+}
+
+.order-info{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:25px;
+
+border:1px solid #eee;
+
+border-radius:12px;
+
+margin-bottom:40px;
+
+}
+
+.order-info div{
+
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+}
+
+.order-info span{
+
+font-size:14px;
+
+color:#888;
+
+}
+
+.order-info strong{
+
+font-size:20px;
+
+color:#198754;
+
+}
+
+.success-buttons{
+
+display:flex;
+
+gap:20px;
+
+justify-content:center;
+
+}
+
+.success-buttons button{
+
+padding:14px 35px;
+
+border:none;
+
+border-radius:10px;
+
+background:#198754;
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.success-buttons button:hover{
+
+background:#146c43;
+
+}
+
+.secondary-btn{
+
+background:white !important;
+
+color:#198754 !important;
+
+border:2px solid #198754 !important;
+
+}
+
+.secondary-btn:hover{
+
+background:#198754 !important;
+
+color:white !important;
+
+}
