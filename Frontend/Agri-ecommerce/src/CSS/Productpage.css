@@ -155,8 +155,83 @@
   font-size: 15px;
 }
 
-.filter-group input[type="range"] {
+/* .filter-group input[type="range"] {
   width: 100%;
+} */
+ .filter-checkbox{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+margin-bottom:14px;
+
+cursor:pointer;
+
+font-size:15px;
+
+font-weight:500;
+
+color:#333;
+
+transition:.3s;
+
+}
+
+.filter-checkbox:hover{
+
+color:#198754;
+
+}
+
+.filter-checkbox input{
+
+display:none;
+
+}
+
+.checkmark{
+
+width:20px;
+
+height:20px;
+
+border:2px solid #198754;
+
+border-radius:6px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+transition:.3s;
+
+background:#fff;
+
+}
+
+.filter-checkbox input:checked + .checkmark{
+
+background:#198754;
+
+border-color:#198754;
+
+}
+
+.filter-checkbox input:checked + .checkmark::after{
+
+content:"✓";
+
+color:#fff;
+
+font-size:13px;
+
+font-weight:bold;
+
 }
 
 /* =========================
@@ -205,11 +280,11 @@
   cursor: pointer;
 } 
 
-/* =========================
+/* /* =========================
    GRID
 ========================= */
 
- .product-grid {
+ /* .product-grid {
   display: grid;
 
   grid-template-columns:
@@ -222,13 +297,13 @@
     );
 
   gap: 25px;
-} 
+}  */ */
 
 /* =========================
    CARD
 ========================= */
 
- .product-card {
+ /* .product-card {
 
   background: white;
 
@@ -255,7 +330,7 @@
     rgba(0,0,0,0.15);
 } */
 
- .product-card img {
+ /* .product-card img {
 
   width: 100%;
 
@@ -272,7 +347,7 @@
   font-size: 18px;
 } */
 
-.product-card p {
+/* .product-card p {
 
   padding:
     0 15px;
@@ -282,9 +357,9 @@
   font-weight: 700;
 
   font-size: 18px;
-} 
+}  */
 
- .product-card button {
+ /* .product-card button {
 
   width: calc(100% - 30px);
 
@@ -305,11 +380,11 @@
   font-weight: 600;
 
   transition: 0.3s;
-} 
+}  */ */
 
- .product-card button:hover {
+ /* .product-card button:hover {
   background: #37914a;
-} 
+}  */ */
 
 .search-box{
   display:flex;
@@ -392,5 +467,302 @@
   }
 
   
+}
+/* ===========================
+   PREMIUM PRODUCT GRID
+=========================== */
+
+.catalog-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+
+gap:30px;
+
+margin-top:20px;
+
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.catalog-card{
+
+position:relative;
+
+background:#fff;
+
+border-radius:18px;
+
+overflow:hidden;
+
+box-shadow:0 6px 20px rgba(0,0,0,.08);
+
+transition:.35s ease;
+
+cursor:pointer;
+
+height:390px;
+
+display:flex;
+
+flex-direction:column;
+
+}
+.catalog-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 18px 45px rgba(0,0,0,.18);
+
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+.catalog-image{
+
+width:100%;
+
+height:180px;
+
+object-fit:contain;
+
+padding:18px;
+
+background:#f8f9fa;
+
+transition:.4s;
+
+}
+
+.catalog-card:hover .catalog-image{
+
+transform:scale(1.08);
+
+}
+
+/* ===========================
+   INFO
+=========================== */
+
+.catalog-info{
+
+padding:16px;
+
+display:flex;
+
+flex-direction:column;
+
+flex:1;
+
+}
+
+.catalog-title{
+
+font-size:18px;
+
+font-weight:700;
+
+margin-bottom:10px;
+
+color:#222;
+
+height:48px;
+
+overflow:hidden;
+
+}
+
+
+.catalog-card:hover .catalog-title{
+
+color:#198754;
+
+}
+
+.catalog-price{
+
+font-size:24px;
+
+font-weight:700;
+
+color:#198754;
+
+margin:12px 0;
+
+}
+/* Stock Tag */
+
+.catalog-stock{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:6px 14px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:700;
+
+text-transform:uppercase;
+
+letter-spacing:.5px;
+
+margin-bottom:12px;
+
+width:fit-content;
+
+}
+
+/* In Stock */
+
+.catalog-stock.in-stock{
+
+background:#dcfce7;
+
+color:#15803d;
+
+border:1px solid #86efac;
+
+}
+
+/* Out Of Stock */
+
+.catalog-stock.out-stock{
+
+background:#fee2e2;
+
+color:#dc2626;
+
+border:1px solid #fca5a5;
+
+}
+
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.catalog-actions{
+
+margin-top:auto;
+
+}
+
+.catalog-btn{
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:10px;
+
+background:#198754;
+
+color:white;
+
+font-size:15px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.catalog-btn:hover{
+
+background:#146c43;
+
+transform:translateY(-2px);
+
+}
+
+
+
+/* ===========================
+   WISHLIST
+=========================== */
+
+.catalog-wishlist{
+
+position:absolute;
+
+top:12px;
+
+right:12px;
+
+width:38px;
+
+height:38px;
+
+border-radius:50%;
+
+background:white;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:18px;
+
+box-shadow:0 3px 10px rgba(0,0,0,.15);
+
+transition:.3s;
+
+z-index:10;
+
+}
+
+.catalog-wishlist:hover{
+
+background:#198754;
+
+color:white;
+
+transform:scale(1.1);
+
+}
+
+
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.catalog-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.catalog-image{
+
+height:220px;
+
+}
+
+.catalog-title{
+
+font-size:20px;
+
+}
+
 }
 

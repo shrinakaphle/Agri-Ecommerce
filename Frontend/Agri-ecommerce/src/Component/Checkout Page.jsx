@@ -110,8 +110,68 @@ const deliveryCharge =
 
 const total =
   subtotal + deliveryCharge;
+
+
+ const validateCheckout = () => {
+
+  if (!shippingInfo.fullName.trim()) {
+
+    toast.error("Full Name is required");
+    return false;
+
+  }
+
+  if (!shippingInfo.phone.trim()) {
+
+    toast.error("Phone Number is required");
+    return false;
+
+  }
+
+  if (!/^[0-9]{10}$/.test(shippingInfo.phone)) {
+
+    toast.error("Phone Number must be 10 digits");
+    return false;
+
+  }
+
+  if (!shippingInfo.address.trim()) {
+
+    toast.error("Address is required");
+    return false;
+
+  }
+
+  if (!shippingInfo.city.trim()) {
+
+    toast.error("City is required");
+    return false;
+
+  }
+
+  if (!shippingInfo.state.trim()) {
+
+    toast.error("State is required");
+    return false;
+
+  }
+
+  if (!shippingInfo.zip.trim()) {
+
+    toast.error("ZIP Code is required");
+    return false;
+
+  }
+
+  return true;
+
+};
   
 const handlePlaceOrder = async () => {
+   if (!validateCheckout()) {
+
+    return;
+   }
 
   try {
 
@@ -158,13 +218,27 @@ const handlePlaceOrder = async () => {
 
     if (res.ok) {
 
-     toast.success(
-  "Order Placed Successfully!"
-);
+  // Clear cart only if order came from Cart
+  if (!isBuyNow) {
 
-      navigate("/order-success");
+    await fetch(
+      `http://localhost:5000/api/cart/clear/${user.id}`,
+      {
+        method: "DELETE"
+      }
+    );
 
-    } else {
+  }
+
+  toast.success("Order Placed Successfully!");
+
+  navigate("/order-success",{
+    state:{
+      order:data.order
+    }
+  });
+
+}else {
 
       toast.error(
   data.message
@@ -247,15 +321,20 @@ const handlePlaceOrder = async () => {
           />
 
           <input
-            placeholder="Phone Number"
-            value={shippingInfo.phone}
-            onChange={(e) =>
-              setShippingInfo({
-                ...shippingInfo,
-                phone: e.target.value
-              })
-            }
-          />
+          type="tel"
+          maxLength="10"
+          placeholder="98XXXXXXXX"
+          value={shippingInfo.phone}
+          onChange={(e)=>
+          setShippingInfo({
+
+         ...shippingInfo,
+
+     phone:e.target.value.replace(/\D/g,"")
+
+})
+}
+/>
 
           <textarea
             placeholder="Address"
@@ -431,13 +510,19 @@ onSuccess={handlePlaceOrder}
 </Elements>
 
 :
-
 <button
 className="place-order-btn"
 onClick={handlePlaceOrder}
+disabled={loading}
 >
 
-Place Order
+{
+loading
+?
+"Placing Order..."
+:
+"Place Order"
+}
 
 </button>
 

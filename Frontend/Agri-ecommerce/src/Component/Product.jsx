@@ -429,42 +429,39 @@ const bannerTitle =
 
           </div>
 
-          <div className="filter-group">
+       <div className="filter-group">
 
-            <h4>
-              Availability
-            </h4>
+  <h4>Availability</h4>
 
-            <label>
+  <label className="filter-checkbox">
 
-              <input
-                type="checkbox"
-                checked={
-                  stockOnly
-                }
-                onChange={() =>
-                  setStockOnly(
-                    !stockOnly
-                  )
-                }
-              />
-
-              In Stock
-
-            </label>
-            <label>
-              <input
-          type="checkbox"
-          checked={showOutOfStock}
-        onChange={() =>
-      setShowOutOfStock(!showOutOfStock)
-    }
+    <input
+      type="checkbox"
+      checked={stockOnly}
+      onChange={() => setStockOnly(!stockOnly)}
     />
-  
-     Out Of Stock
-            </label>
 
-          </div>
+    <span className="checkmark"></span>
+
+    <span>In Stock</span>
+
+  </label>
+
+  <label className="filter-checkbox">
+
+    <input
+      type="checkbox"
+      checked={showOutOfStock}
+      onChange={() => setShowOutOfStock(!showOutOfStock)}
+    />
+
+    <span className="checkmark"></span>
+
+    <span>Out Of Stock</span>
+
+  </label>
+
+</div>
 
         </aside>
 
@@ -513,7 +510,7 @@ const bannerTitle =
 
           </div>
 
-          <div className="product-grid">
+          {/* <div className="product-grid">
 
             {
   filteredProducts.map((product) => (
@@ -577,7 +574,83 @@ const bannerTitle =
 
   ))
 }
-          </div>
+          </div> */}
+<div className="catalog-grid">
+
+{filteredProducts.map((product)=>(
+
+<div
+className="catalog-card"
+key={product.id}
+>
+
+<div
+className="catalog-wishlist"
+onClick={()=>toggleWishlist(product)}
+>
+
+{wishlist.includes(product.id)
+?<FaHeart/>
+:<FaRegHeart/>}
+
+</div>
+
+<img
+className="catalog-image"
+ src={`http://localhost:5000/uploads/${product.image}`}
+  alt={product.name}
+alt={product.name}
+onClick={()=>navigate(`/products/${product.id}`)}
+/>
+
+<div className="catalog-info">
+
+<h3
+className="catalog-title"
+onClick={()=>navigate(`/products/${product.id}`)}
+>
+{product.name}
+</h3>
+
+<span
+  className={
+    product.stock > 0
+      ? "catalog-stock in-stock"
+      : "catalog-stock out-stock"
+  }
+>
+  {product.stock > 0
+    ? "In Stock"
+    : "Out of Stock"}
+</span>
+
+<p className="catalog-price">
+  Rs. {product.price}
+</p>
+
+<div className="catalog-actions">
+
+<button
+className="catalog-btn"
+onClick={()=>
+navigate(`/products/${product.id}`)
+}
+>
+
+View Details
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+))}
+
+</div>
+
           </div>
 
         </div>

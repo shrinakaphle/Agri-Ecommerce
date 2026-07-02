@@ -34,21 +34,23 @@ const Login = () => {
         );
 
         localStorage.setItem(
-          "user",
-          JSON.stringify(
-            response.data.user
-          )
-        );
+"user",
+JSON.stringify( response.data.user)
+);
 
-        alert(
-          response.data.message
-        );
+window.dispatchEvent(
+new Event("login")
+);
 
-        window.dispatchEvent(
-          new Event("login")
-        );
+if(response.data.user.role==="admin"){
 
-        navigate("/");
+navigate("/admin/dashboard");
+
+}else{
+
+navigate("/");
+
+}
 
       }
 

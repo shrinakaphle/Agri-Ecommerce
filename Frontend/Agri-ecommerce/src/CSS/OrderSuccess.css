@@ -1,155 +1,155 @@
+
+
 .success-page{
 
-min-height:80vh;
+    min-height:100vh;
 
-display:flex;
+    display:flex;
 
-justify-content:center;
+    justify-content:center;
 
-align-items:center;
+    align-items:center;
 
-padding:60px;
+    background:#f6f8fa;
 
-background:#f7f8fa;
+    padding:40px;
 
 }
 
 .success-card{
 
-width:600px;
+    width:550px;
 
-background:white;
+    background:#fff;
 
-padding:50px;
+    border-radius:18px;
 
-border-radius:18px;
+    padding:40px;
 
-text-align:center;
+    text-align:center;
 
-box-shadow:0 8px 25px rgba(0,0,0,.08);
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
 
 }
 
 .success-icon{
 
-font-size:90px;
+    font-size:90px;
 
-color:#198754;
+    color:#2e7d32;
 
-margin-bottom:25px;
+    margin-bottom:20px;
 
 }
 
 .success-card h1{
 
-font-size:32px;
+    font-size:34px;
 
-margin-bottom:15px;
+    margin-bottom:10px;
+
+    color:#222;
 
 }
 
 .success-card p{
 
-color:#666;
+    color:#666;
 
-font-size:17px;
-
-margin-bottom:35px;
+    margin-bottom:30px;
 
 }
 
 .order-info{
 
-display:flex;
+    margin:25px 0;
 
-justify-content:space-between;
+    border:1px solid #eee;
 
-padding:25px;
+    border-radius:12px;
 
-border:1px solid #eee;
-
-border-radius:12px;
-
-margin-bottom:40px;
+    overflow:hidden;
 
 }
 
 .order-info div{
 
-display:flex;
+    display:flex;
 
-flex-direction:column;
+    justify-content:space-between;
 
-gap:8px;
+    padding:16px 20px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.order-info div:last-child{
+
+    border-bottom:none;
 
 }
 
 .order-info span{
 
-font-size:14px;
-
-color:#888;
+    color:#666;
 
 }
 
 .order-info strong{
 
-font-size:20px;
-
-color:#198754;
+    color:#222;
 
 }
 
 .success-buttons{
 
-display:flex;
+    display:flex;
 
-gap:20px;
+    gap:15px;
 
-justify-content:center;
+    margin-top:30px;
 
 }
 
 .success-buttons button{
 
-padding:14px 35px;
+    flex:1;
 
-border:none;
+    border:none;
 
-border-radius:10px;
+    padding:14px;
 
-background:#198754;
+    border-radius:10px;
 
-color:white;
+    cursor:pointer;
 
-font-size:16px;
+    font-size:16px;
 
-cursor:pointer;
+    font-weight:600;
 
-transition:.3s;
+    background:#2e7d32;
+
+    color:#fff;
+
+    transition:.3s;
 
 }
 
 .success-buttons button:hover{
 
-background:#146c43;
+    background:#1b5e20;
 
 }
 
-.secondary-btn{
+.shop-btn{
 
-background:white !important;
-
-color:#198754 !important;
-
-border:2px solid #198754 !important;
+    background:#127530 !important;
 
 }
 
-.secondary-btn:hover{
+.shop-btn:hover{
 
-background:#198754 !important;
-
-color:white !important;
+    background:#05581e !important;
 
 }

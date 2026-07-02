@@ -4,12 +4,14 @@ useStripe,
 useElements
 }
 from "@stripe/react-stripe-js";
+import { toast } from "react-toastify";
 
 import { useState }
 from "react";
 
 const StripeCheckoutForm = ({
 total,
+shippingInfo,
 onSuccess
 }) => {
 
@@ -22,18 +24,34 @@ useState(false);
 
 const handleSubmit =
 async(e)=>{
+   
 
 e.preventDefault();
 
 if(!stripe || !elements)
 return;
+ if (
+  !shippingInfo.fullName.trim() ||
+  !shippingInfo.phone.trim() ||
+  !shippingInfo.address.trim() ||
+  !shippingInfo.city.trim() ||
+  !shippingInfo.state.trim() ||
+  !shippingInfo.zip.trim()
+) {
+
+  toast.error("Please fill all shipping information.");
+
+  return;
+
+}
+
+
 
 try{
 
 setLoading(true);
 
-const res =
-await fetch(
+const res =await fetch(
 "http://localhost:5000/api/payment/create-payment-intent",
 {
 method:"POST",
@@ -67,10 +85,7 @@ CardElement
 
 if(result.error){
 
-alert(
-result.error.message
-);
-
+toast.error(result.error.message);
 }
 else if(
 result.paymentIntent.status
@@ -86,9 +101,7 @@ catch(error){
 
 console.log(error);
 
-alert(
-"Payment Failed"
-);
+toast.error("Payment Failed");
 
 }
 

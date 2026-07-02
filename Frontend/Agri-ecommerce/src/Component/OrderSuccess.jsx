@@ -1,13 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import "../CSS/OrderSuccess.css";
+
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
+import "../CSS/OrderSuccess.css";
 
 const OrderSuccess = () => {
 
   const navigate = useNavigate();
 
-  const orderId =
-    "AGR" + Math.floor(Math.random() * 90000 + 10000);
+  const location = useLocation();
+
+  const order = location.state?.order;
 
   return (
 
@@ -15,42 +17,70 @@ const OrderSuccess = () => {
 
       <div className="success-card">
 
-        <FaCheckCircle className="success-icon" />
+        <FaCheckCircle className="success-icon"/>
 
         <h1>Order Placed Successfully!</h1>
 
         <p>
-          Thank you for shopping with
-          <strong> AMARSIDDHI Krishi Udhyog</strong>
+
+          Thank you for shopping with Amar Siddhi Feed.
+
         </p>
 
-        <div className="order-info">
+        {
+          order &&
 
-          <div>
-            <span>Order ID</span>
-            <strong>#{orderId}</strong>
+          <div className="order-info">
+
+            <div>
+
+              <span>Order ID</span>
+
+              <strong>#{order.id}</strong>
+
+            </div>
+
+            <div>
+
+              <span>Payment</span>
+
+              <strong>{order.payment_method}</strong>
+
+            </div>
+
+            <div>
+
+              <span>Status</span>
+
+              <strong>{order.order_status}</strong>
+
+            </div>
+
+            <div>
+
+              <span>Total</span>
+
+              <strong>Rs. {order.total_amount}</strong>
+
+            </div>
+
           </div>
 
-          <div>
-            <span>Estimated Delivery</span>
-            <strong>2 - 4 Days</strong>
-          </div>
-
-        </div>
+        }
 
         <div className="success-buttons">
 
           <button
-            onClick={() => navigate("/products")}
+            onClick={() => navigate("/Orders")}
           >
-            Continue Shopping
+            View My Orders
           </button>
 
           <button
-            className="secondary-btn"
-            onClick={() => navigate("/my-orders")}
+            className="shop-btn"
+            onClick={() => navigate("/productS")}
           >
-            My Orders
+            Continue Shopping
           </button>
 
         </div>

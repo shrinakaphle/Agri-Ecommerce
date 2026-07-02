@@ -121,9 +121,13 @@ const handleAddToCart = async () => {
 
             <div className="main-image">
               <img
-                src={product.image}
-                alt={product.name}
-              />
+  src={
+    product.image?.startsWith("http")
+      ? product.image
+      : `http://localhost:5000/uploads/${product.image}`
+  }
+  alt={product.name}
+/>
             </div>
 
             {/* <div className="thumbnail-list">

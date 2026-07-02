@@ -12,10 +12,12 @@ const EditProfile = () => {
   const id = user?.id;
 
   const [form, setForm] = useState({
+    
     name: user?.name || "",
     phone: user?.phone || "",
     address:user?.address|| ""
   });
+  const [profileImage, setProfileImage] = useState(null);
 
   const handleChange = (e) => {
     setForm({
@@ -24,47 +26,98 @@ const EditProfile = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleImageChange = (e) => {
 
-    try {
-      const res = await fetch(
-        `http://localhost:5000/api/user/UpdateById/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(form)
-        }
+  if (e.target.files[0]) {
+
+    setProfileImage(e.target.files[0]);
+
+  }
+
+};
+  const handleSubmit = async (e) => {
+
+  e.preventDefault();
+
+  try {
+
+    const formData = new FormData();
+
+    formData.append(
+      "name",
+      form.name
+    );
+
+    formData.append(
+      "phone",
+      form.phone
+    );
+
+    formData.append(
+      "address",
+      form.address
+    );
+
+    if (profileImage) {
+
+      formData.append(
+        "profile",
+        profileImage
       );
 
-      const data = await res.json();
+    }
 
-      if (res.ok) {
+    const res = await fetch(
 
-        // update localStorage
-        localStorage.setItem(
-          "user",
-          JSON.stringify(data.user)
-        );
+      `http://localhost:5000/api/user/updateById/${id}`,
 
-        toast.success(
-  "Profile Updated Successfully!"
-);
+      {
 
-        navigate("/profile");
-      } else {
-        alert(data.message);
+        method: "PUT",
+
+        body: formData
+
       }
 
-    } catch (error) {
-      console.log(error);
-      toast.error(
-        "Update Failed!"
-);
+    );
+
+    const data = await res.json();
+
+    if (res.ok) {
+
+      localStorage.setItem(
+
+        "user",
+
+        JSON.stringify(data.user)
+
+      );
+
+      toast.success(
+        "Profile Updated Successfully!"
+      );
+
+      navigate("/profile");
+
     }
-  };
+
+    else {
+
+      toast.error(data.message);
+
+    }
+
+  }
+
+  catch (error) {
+
+    console.log(error);
+
+    toast.error("Update Failed");
+
+  }
+
+};
 
   return (
     <div className="edit-page">
@@ -76,16 +129,81 @@ const EditProfile = () => {
         <form onSubmit={handleSubmit}>
 
   <div className="profile-preview">
+   <div className="input-group">
 
-    <div className="profile-avatar">
-      👤
-    </div>
+<label>
 
-    <h3>{form.name}</h3>
+Profile Picture
 
-    <p>{user?.email}</p>
+</label>
 
-  </div>
+<input
+
+type="file"
+
+accept="image/*"
+
+onChange={handleImageChange}
+
+/>
+
+</div> 
+
+  {
+
+    profileImage ?
+
+    (
+
+      <img
+
+        src={URL.createObjectURL(profileImage)}
+
+        className="profile-avatar-image"
+
+        alt="profile"
+
+      />
+
+    )
+
+    :
+
+    user?.profile_image ?
+
+    (
+
+      <img
+
+        src={`http://localhost:5000/uploads/${user.profile_image}`}
+
+        className="profile-avatar-image"
+
+        alt="profile"
+
+      />
+
+    )
+
+    :
+
+    (
+
+      <div className="profile-avatar">
+
+        👤
+
+      </div>
+
+    )
+
+  }
+
+  <h3>{form.name}</h3>
+
+  <p>{user?.email}</p>
+
+</div>
 
   <div className="input-group">
 

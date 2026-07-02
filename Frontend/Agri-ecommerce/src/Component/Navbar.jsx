@@ -1,6 +1,6 @@
 //  import logo from "../assets/logo.jpeg";
 import {useEffect,useState} from "react";
-import{Link} from "react-router-dom";
+import{NavLink} from "react-router-dom";
 import{FaHeart,FaShoppingCart,FaBell} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
 import{FaUserCircle,FaChevronDown} from "react-icons/fa";
@@ -129,31 +129,48 @@ const updateCount = () => {
        <ul className="nav-links">
 
     <li>
-        <Link to="/">
+        <NavLink to="/"
+        className={({isActive})=>
+isActive ? "nav-item active-nav" : "nav-item"
+}
+end
+>
             Home
-        </Link>
+        </NavLink>
     </li>
 
     <li>
-        <Link to="/products">
+        <NavLink to="/products"
+        className={({isActive})=>
+isActive ? "nav-item active-nav" : "nav-item"
+}
+>
             Products
-        </Link>
+        </NavLink>
     </li>
 
     <li>
-        <Link to="/about">
+        <NavLink to="/about"
+        className={({isActive})=>
+isActive ? "nav-item active-nav" : "nav-item"
+}
+>
             About
-        </Link>
+        </NavLink>
     </li>
 
     <li>
-        <Link to="/contact">
+        <NavLink to="/contact"
+        className={({isActive})=>
+isActive ? "nav-item active-nav" : "nav-item"
+}
+>
             Contact
-        </Link>
+        </NavLink>
     </li>
 
     <li>
-        <Link to ="/wishlist" className="icon-wrapper">
+        <NavLink to ="/wishlist" className="icon-wrapper">
         <FaHeart className="nav-icon" />
          {wishlistCount > 0 && (
 
@@ -164,17 +181,17 @@ const updateCount = () => {
       </span>
 
     )}
-        </Link>
+        </NavLink>
     </li>
     
         <li>
-            <Link to ="/cart" className = "icon-wrapper">
-            <FaShoppingCart className="nav-icon"/></Link>
+            <NavLink to ="/cart" className = "icon-wrapper">
+            <FaShoppingCart className="nav-icon"/></NavLink>
         </li>
         <li>
-            <Link to ="/notifications" className="icon-wrapper">
+            <NavLink to ="/notifications" className="icon-wrapper">
             <FaBell className ="nav-icon" />
-            </Link>
+            </NavLink>
         </li>
     
 
@@ -199,14 +216,25 @@ setShowDropdown(
 }
 
 >
+<div className="navbar-user">
 
-<FaUserCircle
-className="user-profile-icon"
-/>
+  {user?.profile_image ? (
 
-<span>
-{user.name}
-</span>
+    <img
+      src={`http://localhost:5000/uploads/${user.profile_image}`}
+      alt="Profile"
+      className="navbar-profile-image"
+    />
+
+  ) : (
+
+    <FaUserCircle className="navbar-profile-icon" />
+
+  )}
+
+  <span>{user?.name}</span>
+
+</div>
 
 <FaChevronDown/>
 

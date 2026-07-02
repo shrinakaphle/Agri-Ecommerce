@@ -70,21 +70,34 @@ const OrderDetails = () => {
 
       <button
         className="back-btn"
-        onClick={() => navigate("/my-orders")}
+        onClick={() => navigate("/Orders")}
       >
         ← Back To My Orders
       </button>
 
       <div className="order-header">
+<div>
 
-        <h1>
-          Order #{order.id}
-        </h1>
+    <h1>
+      Order #{order.id}
+    </h1>
 
-        <span className={`status ${order.order_status.toLowerCase()}`}>
-          {order.order_status}
-        </span>
+    <p className="order-date">
 
+      Placed on:
+
+      {new Date(order.created_at).toLocaleDateString()}
+
+    </p>
+
+  </div>
+
+  <span className={`status ${order.order_status.toLowerCase()}`}>
+
+    {order.order_status}
+
+  </span>
+        
       </div>
 
       <div className="info-grid">
@@ -113,40 +126,38 @@ const OrderDetails = () => {
 
         <h2>Ordered Products</h2>
 
-        {
-          items.map((item) => (
+        {items.map((item) => (
 
-            <div
-              className="product-row"
-              key={item.id}
-            >
+  <div className="product-card" key={item.id}>
 
-              <div>
+    <img
+  className="product-image"
+  src={
+    item.image?.startsWith("http")
+      ? item.image
+      : `http://localhost:5000/uploads/${item.image}`
+  }
+  alt={item.product_name}
+/>
+    <div className="product-details">
 
-                <h4>{item.product_name}</h4>
+      <h3>{item.product_name}</h3>
 
-                <p>
-                  {item.weight}
-                </p>
+      <p>Weight : {item.weight}</p>
 
-              </div>
+      <p>Quantity : {item.quantity}</p>
 
-              <div>
+    </div>
 
-                Qty : {item.quantity}
+    <div className="product-price">
 
-              </div>
+      Rs. {item.price}
 
-              <div>
+    </div>
 
-                Rs {item.price}
+  </div>
 
-              </div>
-
-            </div>
-
-          ))
-        }
+))}
 
       </div>
 

@@ -64,7 +64,7 @@ Wishlist
 </NavLink>
 
 <NavLink
-to="/orders"
+to="/Orders"
 className={({isActive}) =>
 isActive
 ? "sidebar-link active"
@@ -147,9 +147,37 @@ Logout
 
 <div className="profile-card">
 
-<FaUserCircle
-className="profile-avatar"
+{
+
+user?.profile_image ?
+
+(
+
+<img
+
+src={`http://localhost:5000/uploads/${user.profile_image}`}
+
+alt="Profile"
+
+className="profile-avatar-image"
+
 />
+
+)
+
+:
+
+(
+
+<FaUserCircle
+
+className="profile-avatar"
+
+/>
+
+)
+
+}
 
 <h2>
 {user?.name}
@@ -182,8 +210,18 @@ className="profile-avatar"
 <strong>Address:</strong>
 
 <span>
-Not Added
+
+{
+
+user?.address ||
+
+"Not Added"
+
+}
+
 </span>
+
+</div>
 
 </div>
 </div>
@@ -200,7 +238,7 @@ Edit Profile
 </div>
 
 </div>
-</div>
+
 
 
 

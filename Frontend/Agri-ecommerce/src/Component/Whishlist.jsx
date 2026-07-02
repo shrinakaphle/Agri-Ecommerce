@@ -68,12 +68,15 @@ const Wishlist = () => {
     removeWishlist(product.id)
   }
 />
-
-            <img
-              src={product.image}
-              alt={product.name}
-            />
-
+<img
+  src={
+    product.image?.startsWith("http")
+      ? product.image
+      : `http://localhost:5000/uploads/${product.image}`
+  }
+  alt={product.name}
+/>
+            
             <h4>
               {product.name}
             </h4>

@@ -115,7 +115,14 @@ const Cart = () => {
                 <div className="table-row" key={item.id}>
 
                   <div className="product-cell">
-                    <img src={item.image} alt={item.name} />
+                    <img
+  src={
+    item.image?.startsWith("http")
+      ? item.image
+      : `http://localhost:5000/uploads/${item.image}`
+  }
+  alt={item.name}
+/>
                     <span>{item.name}</span>
                   </div>
 
