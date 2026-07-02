@@ -104,7 +104,7 @@ const updateProduct = async (
       image = $4,
       ingredients = $5,
       feeding_guide = $6,
-      category_id = $7
+      category_id = $7,
       stock =$8
     WHERE id = $9
     RETURNING *
@@ -117,8 +117,8 @@ const updateProduct = async (
       ingredients,
       feedingGuide,
       categoryId,
-      id,
       stock,
+      id
     ]
   );
 

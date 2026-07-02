@@ -2,7 +2,8 @@ const {
   addToCart,
   getUserCart,
   updateQuantity,
-  deleteCartItem
+  deleteCartItem,
+  clearCartDB
 } = require(
   "../model/cartModel"
 );
@@ -122,7 +123,7 @@ async (req,res) => {
 
   }
 };
-
+//REMOVE ONE CART ITEM 
 const deleteCartDB =
 async (req,res) => {
 
@@ -150,11 +151,42 @@ async (req,res) => {
     });
 
   }
+
 };
 
+// =========================
+// CLEAR USER CART
+// =========================
+//REMOVE ALL CART ITEM AFTER CHECKOUT
+const clearCart = async (req, res) => {
+
+  try {
+
+    const { id } = req.params;
+
+    await clearCartDB(id);
+
+    res.status(200).json({
+      success: true,
+      message: "Cart Cleared Successfully"
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed To Clear Cart"
+    });
+
+  }
+
+};
 module.exports = {
   addCartDB,
   getCartDB,
   updateCartDB,
-  deleteCartDB
+  deleteCartDB,
+  clearCart
 };

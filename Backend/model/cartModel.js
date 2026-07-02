@@ -148,10 +148,27 @@ async (id) => {
 
   return result.rows[0];
 };
+// =========================
+// CLEAR USER CART
+// =========================
 
+const clearCartDB = async (user_id) => {
+
+  const result = await pool.query(
+    `
+    DELETE FROM cart
+    WHERE user_id = $1
+    `,
+    [user_id]
+  );
+
+  return result;
+
+};
 module.exports = {
   addToCart,
   getUserCart,
   updateQuantity,
-  deleteCartItem
+  deleteCartItem,
+  clearCartDB
 };

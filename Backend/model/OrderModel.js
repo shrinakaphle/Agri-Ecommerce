@@ -106,7 +106,7 @@ const getOrderItemsDB = async (
     `
     SELECT
     oi.*,
-    p.name,
+    p.name As product_name,
     p.image
     FROM order_items oi
     JOIN products p
@@ -123,9 +123,14 @@ const getOrderByIdDB = async (id) => {
 
   const result = await pool.query(
     `
-    SELECT *
+    SELECT
+      orders.*,
+      users.name,
+      users.email
     FROM orders
-    WHERE id = $1
+    JOIN users
+      ON orders.user_id = users.id
+    WHERE orders.id = $1
     `,
     [id]
   );
@@ -133,10 +138,68 @@ const getOrderByIdDB = async (id) => {
   return result.rows[0];
 
 };
+
+// ==============================
+// GET ALL ORDERS (ADMIN)
+// ==============================
+
+const getAllOrders = async () => {
+
+  const result = await pool.query(
+    `
+    SELECT
+      orders.id,
+      orders.user_id,
+      orders.total_amount,
+      orders.payment_method,
+      orders.payment_status,
+      orders.order_status,
+      orders.created_at,
+      users.name,
+      users.email
+    FROM orders
+    JOIN users
+      ON orders.user_id = users.id
+    ORDER BY orders.created_at DESC
+    `
+  );
+
+  return result.rows;
+
+};
+// ==============================
+// UPDATE ORDER STATUS
+// ==============================
+
+const updateOrderStatus = async (
+  id,
+  status
+) => {
+
+  const result = await pool.query(
+    `
+    UPDATE orders
+    SET order_status = $1
+    WHERE id = $2
+    RETURNING *
+    `,
+    [
+      status,
+      id
+    ]
+  );
+
+  return result.rows[0];
+
+};
+
 module.exports = {
   createOrderDB,
   createOrderItemDB,
   getOrdersByUserDB,
   getOrderItemsDB,
-  getOrderByIdDB
+  getOrderByIdDB,
+  getAllOrders,
+ updateOrderStatus
+
 };

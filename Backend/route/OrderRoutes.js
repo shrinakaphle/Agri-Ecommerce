@@ -5,7 +5,9 @@ const router = express.Router();
 const {
   createOrder,
   getOrdersByUser,
-  getOrderDetails
+  getOrderDetails,
+  fetchAllOrders ,
+  changeOrderStatus
 } = require("../controller/OrderController");
 
 
@@ -36,6 +38,20 @@ router.get(
 router.get(
   "/details/:id",
   getOrderDetails
+);
+
+router.get(
+"/",
+fetchAllOrders
+);
+
+// ==============================
+// UPDATE ORDER STATUS
+// ==============================
+
+router.put(
+  "/status/:id",
+  changeOrderStatus
 );
 
 

@@ -1,6 +1,7 @@
-const { createUser, existingUser,getallUsers,getUserById,getdeleteById,getUpdateByID} =require("../model/UserModel");
+const { createUser, existingUser,getallUsers,getUserById,getdeleteById,getUpdateByID,getCustomersWithOrders,getCustomerDetails } =require("../model/UserModel");
 const bcrypt =require("bcrypt");
 const JWT =require("jsonwebtoken");
+const upload = require("../middleware/uploads");
 
 
 // CREATE USER (REGISTER)
@@ -155,7 +156,13 @@ const login = async (req, res) => {
           user.email,
 
         phone:
-          user.phone
+          user.phone,
+
+          address:user.address,
+
+          profile_image:user.profile_image,
+          
+          role:user.role
 
       }
 
@@ -273,14 +280,21 @@ const getUpdateByIDDB =
 
       const {
         name,
-        phone
+        phone,
+        address
       } = req.body;
+
+      const profile_image = req.file
+      ? req.file.filename
+      : null;
 
       const user =
         await getUpdateByID(
           id,
           name,
-          phone
+          phone,
+          address,
+          profile_image
         );
 
       if (!user) {
@@ -368,7 +382,58 @@ const getUserdeleteByIDDB =
     }
 
   };
+const fetchCustomers = async (req, res) => {
 
+  try {
+
+    const customers =
+      await getCustomersWithOrders();
+
+    res.status(200).json({
+      success: true,
+      customers,
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+
+};
+
+// =====================================
+// GET CUSTOMER DETAILS
+// =====================================
+
+const fetchCustomerDetails = async (req, res) => {
+
+  try {
+
+    const data =
+      await getCustomerDetails(
+        req.params.id
+      );
+
+    res.status(200).json({
+      success: true,
+      customer: data.customer,
+      orders: data.orders
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
+};
 
 
 module.exports = {
@@ -383,6 +448,10 @@ module.exports = {
 
   getUpdateByIDDB,
 
-  getUserdeleteByIDDB
+  getUserdeleteByIDDB,
+
+   fetchCustomers,
+   
+   fetchCustomerDetails
 
 };

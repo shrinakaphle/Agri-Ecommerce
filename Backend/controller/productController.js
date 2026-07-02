@@ -202,6 +202,8 @@ const {
 // CREATE PRODUCT
 // =========================
 const addProduct = async (req, res) => {
+    console.log("BODY:", req.body);
+  console.log("FILE:", req.file);
   try {
     const {
       name,
@@ -213,9 +215,9 @@ const addProduct = async (req, res) => {
       stock,
     } = req.body;
 
-    const image = req.file
-      ? `http://localhost:5000/uploads/${req.file.filename}`
-      : null;
+   const image = req.file
+? req.file.filename
+: null;
 
     const product = await createProduct(
       name,
@@ -323,11 +325,9 @@ const editProduct = async (req, res) => {
       category_id,
       stock,
     } = req.body;
-
-    const image = req.file
-      ? `http://localhost:5000/uploads/${req.file.filename}`
-      : oldProduct.image;
-
+const image = req.file
+  ? req.file.filename
+  : oldProduct.image;
     const updatedProduct = await updateProduct(
       id,
       name,

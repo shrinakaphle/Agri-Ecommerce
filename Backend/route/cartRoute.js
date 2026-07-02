@@ -8,7 +8,8 @@ const {
   addCartDB,
   getCartDB,
   updateCartDB,
-  deleteCartDB
+  deleteCartDB,
+  clearCart
 } = require(
   "../controller/cartController"
 );
@@ -32,6 +33,12 @@ router.delete(
   "/delete/:id",
   deleteCartDB
 );
+
+router.delete(
+  "/clear/:id",
+  clearCart
+);
+
 
 module.exports =
 router;

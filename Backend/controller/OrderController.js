@@ -2,7 +2,10 @@ const {
   createOrderDB,
   createOrderItemDB,
   getOrdersByUserDB,
-  getOrderItemsDB
+  getOrderItemsDB,
+  getOrderByIdDB,
+   getAllOrders,
+   updateOrderStatus
 } = require("../model/OrderModel");
 
 // =========================
@@ -103,28 +106,109 @@ const getOrderDetails = async (req, res) => {
 
     const { id } = req.params;
 
-    const items = await getOrderItemsDB(id);
+    const order =
+      await getOrderByIdDB(id);
+
+    const items =
+      await getOrderItemsDB(id);
 
     res.status(200).json({
+
       success: true,
+
+      order,
+
       items
+
     });
 
-  } catch (error) {
+  }
+
+  catch (error) {
 
     console.log(error);
 
     res.status(500).json({
+
       success: false,
-      message: "Failed To Fetch Order Details"
+
+      message:
+      "Failed To Fetch Order Details"
+
     });
 
   }
 
 };
 
+// ====================================
+// ADMIN GET ALL ORDERS
+// ====================================
+
+const fetchAllOrders = async (req, res) => {
+
+  try {
+
+    const orders = await getAllOrders();
+
+    res.status(200).json({
+      success: true,
+      orders
+    });
+
+  }
+
+  catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
+};
+
+// ==============================
+// UPDATE ORDER STATUS
+// ==============================
+
+const changeOrderStatus = async (req, res) => {
+
+  try {
+
+    const { id } = req.params;
+
+    const { status } = req.body;
+
+    const updatedOrder = await updateOrderStatus(
+      id,
+      status
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Order status updated successfully",
+      order: updatedOrder
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
+};
 module.exports = {
   createOrder,
   getOrdersByUser,
-  getOrderDetails
+  getOrderDetails,
+  fetchAllOrders ,
+  changeOrderStatus
+
+  
+
 };
