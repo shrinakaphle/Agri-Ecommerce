@@ -12,6 +12,7 @@ const userRoutes=require("./route/UserRoute");
 const cartRoute =require("./route/cartRoute");
 const paymentRoutes =require("./route/paymentRoute");
 const orderRoutes =require("./route/OrderRoutes");
+const analyticsRoutes =require("./route/AnalyticsRoute");
 app.use(cors());
 app.use(express.json());
 app.use("/uploads",express.static("uploads"));
@@ -20,6 +21,7 @@ app.use("/api/user",userRoutes);
 app.use( "/api/cart",  cartRoute);
 app.use("/api/payment",paymentRoutes);
 app.use("/api/order",orderRoutes);
+app.use("/api/analytics", analyticsRoutes);
 const PORT = process.env.PORT || 5000;
 app.get("/",(req,res)=>{ 
     console.log('server is running')     
