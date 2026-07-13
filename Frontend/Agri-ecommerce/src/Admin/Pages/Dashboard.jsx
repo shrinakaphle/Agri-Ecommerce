@@ -5,8 +5,20 @@ import {
   FaUsers,
   FaDollarSign
 } from "react-icons/fa";
-
 import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend
+} from "recharts";
+import Api,{
   getAllProducts,
   getAllOrders,
   getAllUsers
@@ -29,6 +41,12 @@ revenue:0,
 ordersList:[]
 
 });
+
+const [analytics, setAnalytics] = useState({
+  monthlySales: [],
+  orderStatus: [],
+  topProducts: []
+});
   
 
   const loadDashboard = async () => {
@@ -41,7 +59,8 @@ ordersList:[]
 
         orderRes,
 
-        userRes
+        userRes,
+         analyticsRes
 
       ] = await Promise.all([
 
@@ -49,7 +68,9 @@ ordersList:[]
 
         getAllOrders(),
 
-        getAllUsers()
+        getAllUsers(),
+        Api.get("/api/analytics")
+
 
       ]);
 
@@ -80,6 +101,16 @@ revenue,
 ordersList:orders
 
 });
+setAnalytics({
+
+  monthlySales: analyticsRes.data.monthlySales,
+
+  orderStatus: analyticsRes.data.orderStatus,
+
+  topProducts: analyticsRes.data.topProducts
+
+});
+
 
     }
 
@@ -95,6 +126,13 @@ ordersList:orders
     loadDashboard();
 
   }, []);
+  const COLORS = [
+  "#2e7d32",
+  "#ff9800",
+  "#2196f3",
+  "#f44336",
+  "#9c27b0"
+];
   return (
 
     <div className="dashboard">
@@ -186,6 +224,162 @@ ordersList:orders
         </div>
 
       </div>
+
+   <div className="dashboard-charts">
+
+  {/* Monthly Revenue */}
+
+  <div className="chart-card">
+
+    <h2>Monthly Revenue</h2>
+
+    <ResponsiveContainer
+      width="100%"
+      height={320}
+    >
+
+      <BarChart
+        data={analytics.monthlySales}
+      >
+
+        <CartesianGrid strokeDasharray="3 3"/>
+
+        <XAxis dataKey="month"/>
+
+        <YAxis/>
+
+        <Tooltip/>
+
+        <Legend/>
+
+        <Bar
+          dataKey="revenue"
+          fill="#2e7d32"
+        />
+
+      </BarChart>
+
+    </ResponsiveContainer>
+
+  </div>
+
+  {/* Order Status */}
+
+  <div className="chart-card">
+
+    <h2>Order Status</h2>
+
+    <ResponsiveContainer
+      width="100%"
+      height={320}
+    >
+
+      <PieChart>
+
+        <Pie
+
+          data={analytics.orderStatus}
+
+          dataKey="total"
+
+          nameKey="order_status"
+
+          outerRadius={110}
+
+          label
+
+        >
+
+          {
+
+            analytics.orderStatus.map((entry,index)=>(
+
+              <Cell
+
+                key={index}
+
+                fill={
+                  COLORS[index % COLORS.length]
+                }
+
+              />
+
+            ))
+
+          }
+
+        </Pie>
+
+        <Tooltip/>
+
+        <Legend/>
+
+      </PieChart>
+   
+
+    </ResponsiveContainer>
+
+  </div>
+
+</div>
+<div className="top-products-card">
+
+  <h2>🔥 Top Selling Products</h2>
+
+  {
+
+    analytics.topProducts.map((product,index)=>(
+
+      <div
+        className="top-product"
+        key={index}
+      >
+
+        <div className="product-top">
+
+          <div>
+
+            <h4>{product.name}</h4>
+
+            <span>{product.sold} Units Sold</span>
+
+          </div>
+
+          <strong>
+
+            #{index+1}
+
+          </strong>
+
+        </div>
+
+        <div className="progress-bar">
+
+          <div
+
+            className="progress-fill"
+
+            style={{
+
+              width:`${
+                analytics.topProducts.length
+                ? (product.sold / analytics.topProducts[0].sold) * 100
+                : 0
+              }%`
+
+            }}
+
+          ></div>
+
+        </div>
+
+      </div>
+
+    ))
+
+  }
+
+</div>
       <div className="dashboard-bottom">
 
   <div className="recent-orders">
