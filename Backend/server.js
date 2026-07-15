@@ -17,6 +17,9 @@ const paymentRoutes =require("./route/paymentRoute");
 const orderRoutes =require("./route/OrderRoutes");
 const analyticsRoutes =require("./route/AnalyticsRoute");
 const notificationRoutes=require("./route/NotificationRoute");
+const passwordRoutes =require("./route/PasswordResetRoute");
+
+
 app.use(cors());
 app.use(express.json());
 app.use("/uploads",express.static("uploads"));
@@ -27,7 +30,7 @@ app.use("/api/payment",paymentRoutes);
 app.use("/api/order",orderRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/notification",notificationRoutes);
-
+app.use("/api/password",passwordRoutes);
 app.get("/",(req,res)=>{ 
     console.log('server is running')     
     res.send("Backend is running");
