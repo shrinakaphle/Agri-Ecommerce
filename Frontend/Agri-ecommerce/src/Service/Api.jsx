@@ -85,4 +85,17 @@ export const markAdminNotificationRead = (id) =>
 
 export const markAllAdminNotificationsRead = () =>
   Api.put("/api/notification/read-all/admin");
+
+// ===========================
+// FORGOT PASSWORD
+// ===========================
+
+export const sendOTP = (data) =>
+  Api.post("/api/password/send-otp", data);
+
+export const verifyOTP = (data) =>
+  Api.post("/api/password/verify-otp", data);
+
+export const resetPassword = (data) =>
+  Api.post("/api/password/reset-password", data);
 export default Api;

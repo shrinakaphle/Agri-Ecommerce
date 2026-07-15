@@ -19,7 +19,9 @@ import { useEffect } from "react";
 import socket from "./Socket/socket";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import ForgotPassword from "./Pages/ForgotPassword";
+import VerifyOTP from "./Pages/VerifyOTP";
+import ResetPassword from "./Pages/ResetPassword";
 
 // Admin Side //
 import Dashboard from "./Admin/Pages/Dashboard";
@@ -183,7 +185,20 @@ element ={<Login />}
 <Route path="/checkout" element ={<Checkout Page/>}/>
 <Route path="/order-success" element ={<OrderSuccess Page/>}/>
 <Route path="/order/:id" element ={<OrderDetails/>}/>
+<Route
+path="/forgot-password"
+element={<ForgotPassword/>}
+/>
 
+<Route
+path="/verify-otp"
+element={<VerifyOTP/>}
+/>
+
+<Route
+path="/reset-password"
+element={<ResetPassword/>}
+/>
 
 
 
