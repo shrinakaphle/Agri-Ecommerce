@@ -1,0 +1,11 @@
+# Environment files
+.env
+**/.env
+Backend/.env
+
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Upload files
+Backend/uploads/
