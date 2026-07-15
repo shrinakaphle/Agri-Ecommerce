@@ -15,7 +15,10 @@ import Cart from "./Component/Cart";
 import Checkout from "./Component/Checkout Page";
 import OrderSuccess from "./Component/OrderSuccess";
 import OrderDetails from "./Component/OrderDetails";
-
+import { useEffect } from "react";
+import socket from "./Socket/socket";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 // Admin Side //
@@ -32,6 +35,109 @@ import CustomerDetails from "./Admin/Pages/CustomerDetails";
 
 
 const App = () => {
+ useEffect(() => {
+
+  const joinUser = () => {
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user?.id) {
+
+      socket.emit("join-user", user.id);
+
+      console.log("👤 Joined:", user.id);
+
+    }
+
+  };
+
+  joinUser();
+
+  window.addEventListener("storage", joinUser);
+
+  return () => {
+
+    window.removeEventListener("storage", joinUser);
+
+  };
+
+}, []);
+useEffect(() => {
+
+  console.log("🎧 Listening for order-status...");
+
+  const handleOrderStatus = (data) => {
+
+    console.log("📦 RECEIVED:", data);
+
+    toast.info(data.message, {
+      position: "top-right",
+      autoClose: 5000,
+    });
+
+  };
+
+  socket.on("order-status", handleOrderStatus);
+
+  return () => {
+
+    socket.off("order-status", handleOrderStatus);
+
+  };
+
+}, []);
+useEffect(() => {
+
+  socket.on("order-status", (notification) => {
+
+  console.log("📦 RECEIVED:", notification);
+
+  toast.info(notification.message, {
+
+    position: "top-right",
+
+    autoClose: 5000
+
+  });
+
+});
+
+  socket.on("disconnect", (reason) => {
+
+    console.log("❌ Disconnected:", reason);
+
+  });
+
+  socket.on("connect_error", (err) => {
+
+    console.log("🚨 Socket Error:", err.message);
+
+  });
+
+  return () => {
+
+    socket.off("connect");
+    socket.off("disconnect");
+    socket.off("connect_error");
+
+  };
+
+}, []);
+useEffect(() => {
+
+  socket.on("welcome", (data) => {
+
+    console.log("WELCOME:", data);
+
+  });
+
+  return () => {
+
+    socket.off("welcome");
+
+  };
+
+}, []);
   const location = useLocation();
 
 const isAdminRoute =
@@ -160,6 +266,13 @@ element={<AddProduct/>}
   element={<CustomerDetails />}
 />
       </Routes>
+      <ToastContainer
+    position="top-right"
+    autoClose={5000}
+    newestOnTop
+    closeOnClick
+    pauseOnHover
+  />
     </>
   );
 };

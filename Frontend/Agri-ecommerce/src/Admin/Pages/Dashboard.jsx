@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import socket from "../../Socket/socket";
+import { toast } from "react-toastify";
 import {
   FaBoxOpen,
   FaClipboardList,
@@ -123,9 +125,48 @@ setAnalytics({
   };
  useEffect(() => {
 
+  // Join the admin room
+  socket.emit("join-admin");
+
+  console.log("👑 Admin joined Socket.IO");
+
+  // Initial dashboard load
+  loadDashboard();
+
+  // Listen for new orders
+  socket.on("new-order", (data) => {
+
+    console.log("📦 New Order Received:", data);
+
+    toast.success(data.message, {
+  position: "top-right",
+  autoClose: 4000,
+});
+
+    // Refresh dashboard automatically
     loadDashboard();
 
-  }, []);
+  });
+
+  // Listen for order status updates
+  socket.on("order-updated", (data) => {
+
+    console.log("🔄 Order Updated:", data);
+
+    loadDashboard();
+
+  });
+
+  // Cleanup listeners
+  return () => {
+
+    socket.off("new-order");
+
+    socket.off("order-updated");
+
+  };
+
+}, []);
   const COLORS = [
   "#2e7d32",
   "#ff9800",

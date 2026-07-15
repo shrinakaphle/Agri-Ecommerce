@@ -64,5 +64,25 @@ export const updateProduct = (id, data) => {
 export const getSingleProduct = (id) => {
   return Api.get(`/api/products/${id}`);
 };
+// ==========================
+// NOTIFICATIONS
+// ==========================
 
+export const getUserNotifications = (id) =>
+  Api.get(`/api/notification/user/${id}`);
+
+export const markNotificationRead = (id) =>
+  Api.put(`/api/notification/read/${id}`);
+
+export const markAllNotificationsRead = (id) =>
+  Api.put(`/api/notification/read-all/${id}`);
+
+export const getAdminNotifications = () =>
+  Api.get("/api/notification/admin");
+
+export const markAdminNotificationRead = (id) =>
+  Api.put(`/api/notification/read/${id}`);
+
+export const markAllAdminNotificationsRead = () =>
+  Api.put("/api/notification/read-all/admin");
 export default Api;

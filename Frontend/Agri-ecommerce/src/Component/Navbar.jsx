@@ -4,12 +4,47 @@ import{NavLink} from "react-router-dom";
 import{FaHeart,FaShoppingCart,FaBell} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
 import{FaUserCircle,FaChevronDown} from "react-icons/fa";
+import socket from "../Socket/socket";
+import { useRef } from "react";
  import"../CSS/Navbar.css";
+ import {
+
+  getUserNotifications,
+
+  markAllNotificationsRead,
+    markNotificationRead
+
+} from "../Service/Api";
 
 const Navbar = ()=>{
 const navigate = useNavigate();
 
+const [notifications, setNotifications] = useState([]);
 
+const [notificationOpen, setNotificationOpen] = useState(false);
+
+const [unreadCount, setUnreadCount] = useState(0);
+const formatTime = (date) => {
+
+  const diff = Math.floor(
+
+    (Date.now() - new Date(date)) / 1000
+
+  );
+
+  if (diff < 60) return "Just now";
+
+  if (diff < 3600)
+
+    return `${Math.floor(diff / 60)} min ago`;
+
+  if (diff < 86400)
+
+    return `${Math.floor(diff / 3600)} hr ago`;
+
+  return `${Math.floor(diff / 86400)} day ago`;
+
+};
 const [user,setUser] =
 useState(
 
@@ -19,6 +54,7 @@ localStorage.getItem("user")
 )
 
 );
+const notificationRef = useRef(null);
 const [showDropdown,
 setShowDropdown] =
 useState(false);
@@ -114,6 +150,103 @@ const updateCount = () => {
     );
 
 }, []);
+useEffect(() => {
+
+  if (!user) return;
+
+  const loadNotifications = async () => {
+
+    const res = await getUserNotifications(user.id);
+
+    setNotifications(res.data.notifications);
+
+    const unread = res.data.notifications.filter(
+
+      n => !n.is_read
+
+    );
+
+    setUnreadCount(unread.length);
+
+  };
+
+  loadNotifications();
+
+}, [user]);
+useEffect(() => {
+
+  socket.on("order-status", (notification) => {
+
+    setNotifications(prev => [
+
+      notification,
+
+      ...prev
+
+    ]);
+
+    setUnreadCount(prev => prev + 1);
+
+  });
+
+  return () => {
+
+   const handleOrderStatus = (notification) => {
+
+  setNotifications(prev => [notification, ...prev]);
+
+  setUnreadCount(prev => prev + 1);
+
+};
+
+socket.on("order-status", handleOrderStatus);
+
+return () => {
+
+  socket.off("order-status", handleOrderStatus);
+
+};
+
+  };
+
+}, []);
+useEffect(() => {
+
+  const handleClickOutside = (event) => {
+
+    if (
+
+      notificationRef.current &&
+
+      !notificationRef.current.contains(event.target)
+
+    ) {
+
+      setNotificationOpen(false);
+
+    }
+
+  };
+
+  document.addEventListener(
+
+    "mousedown",
+
+    handleClickOutside
+
+  );
+
+  return () =>
+
+    document.removeEventListener(
+
+      "mousedown",
+
+      handleClickOutside
+
+    );
+
+}, []);
 
 
     return(
@@ -189,9 +322,177 @@ isActive ? "nav-item active-nav" : "nav-item"
             <FaShoppingCart className="nav-icon"/></NavLink>
         </li>
         <li>
-            <NavLink to ="/notifications" className="icon-wrapper">
-            <FaBell className ="nav-icon" />
-            </NavLink>
+           <div
+  className="notification-bell"
+  
+  onClick={() => {
+
+    setNotificationOpen(!notificationOpen);
+
+  }}
+>
+<div
+ref={notificationRef}
+className="notification-wrapper"
+></div>
+  <FaBell />
+
+  {
+
+    unreadCount > 0 && (
+
+      <span className="notification-count">
+
+        {unreadCount}
+
+      </span>
+
+    )
+
+  }
+  {
+
+notificationOpen && (
+
+<div className="notification-dropdown">
+
+<div className="notification-header">
+
+  <h4>Notifications</h4>
+
+  <button
+
+    className="mark-all-btn"
+
+    onClick={async () => {
+
+      await markAllNotificationsRead(user.id);
+
+      setUnreadCount(0);
+
+      setNotifications(
+
+        notifications.map(n => ({
+          ...n,
+          is_read: true
+        }))
+
+      );
+
+    }}
+
+  >
+
+    Mark all
+
+  </button>
+
+</div>
+
+{
+
+notifications.length === 0 ?
+
+<p>No Notifications</p>
+
+:
+
+<div className="notification-list">
+
+{
+
+notifications.length === 0 ?
+
+<p className="empty-notification">
+
+No Notifications
+
+</p>
+
+:
+
+notifications.map((item) => (
+
+<div
+
+key={item.id}
+
+className={`notification-item ${item.is_read ? "" : "unread"}`}
+
+onClick={async () => {
+
+  if (!item.is_read) {
+
+    await markNotificationRead(item.id);
+
+    setNotifications(
+
+      notifications.map(n =>
+
+        n.id === item.id
+
+          ? {
+
+              ...n,
+
+              is_read: true
+
+            }
+
+          : n
+
+      )
+
+    );
+
+    setUnreadCount(prev =>
+
+      Math.max(prev - 1, 0)
+
+    );
+
+  }
+
+}}
+
+>
+
+<strong>
+
+{item.title}
+
+</strong>
+
+<p>
+
+{item.message}
+
+</p>
+
+<small>
+
+  {formatTime(item.created_at)}
+
+</small>
+
+</div>
+
+))
+
+}
+
+</div>
+}
+
+
+
+</div>
+
+)
+
+}
+
+</div>
         </li>
     
 

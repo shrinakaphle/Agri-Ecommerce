@@ -406,3 +406,202 @@ width:70%;
 background:white;
 
 }
+.notification-bell{
+
+position:relative;
+
+cursor:pointer;
+
+font-size:22px;
+
+}
+
+.notification-count{
+
+position:absolute;
+
+top:-8px;
+
+right:-8px;
+
+background:red;
+
+color:white;
+
+width:18px;
+
+height:18px;
+
+border-radius:50%;
+
+font-size:11px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.notification-dropdown{
+
+    position:absolute;
+
+    top:55px;
+
+    right:0;
+
+    width:360px;
+
+    background:#fff;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+
+    overflow:hidden;
+
+    z-index:9999;
+
+}
+/* Header */
+
+.notification-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 16px;
+
+    border-bottom:1px solid #eee;
+
+    background:#fff;
+
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+}
+
+.notification-header h4{
+
+margin:0;
+
+font-size:18px;
+
+}
+
+.mark-all-btn{
+
+background:none;
+
+border:none;
+
+color:#2E7D32;
+
+font-weight:600;
+
+cursor:pointer;
+
+font-size:14px;
+
+}
+
+/* Scroll Area */
+.notification-list::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+.notification-list::-webkit-scrollbar-track{
+
+    background:#f1f1f1;
+
+    border-radius:10px;
+
+}
+
+.notification-list::-webkit-scrollbar-thumb{
+
+    background:#2E7D32;
+
+    border-radius:10px;
+
+}
+
+.notification-list::-webkit-scrollbar-thumb:hover{
+
+    background:#1B5E20;
+
+}
+
+/* Notification */
+
+.notification-item{
+
+padding:14px;
+
+border-bottom:1px solid #f1f1f1;
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+.notification-item:hover{
+
+background:#f8f8f8;
+
+}
+
+.notification-item.unread{
+
+background:#eef8ee;
+
+}
+
+.notification-item strong{
+
+display:block;
+
+font-size:15px;
+
+color:#2E7D32;
+
+margin-bottom:5px;
+
+}
+
+.notification-item p{
+
+margin:4px 0;
+
+font-size:14px;
+
+color:#444;
+
+}
+
+.notification-item small{
+
+color:#888;
+
+font-size:12px;
+
+}
+
+.empty-notification{
+
+padding:25px;
+
+text-align:center;
+
+color:#888;
+
+}
