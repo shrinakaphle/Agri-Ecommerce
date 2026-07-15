@@ -5,8 +5,14 @@ const {
   getOrderItemsDB,
   getOrderByIdDB,
    getAllOrders,
-   updateOrderStatus
+   updateOrderStatus,
+
 } = require("../model/OrderModel");
+const {
+
+  createNotification
+
+} = require("../model/NotificationModel");
 
 // =========================
 // CREATE ORDER
@@ -46,7 +52,33 @@ const createOrder = async (req, res) => {
       );
 
     }
+    // ============================
+// SOCKET.IO NOTIFICATION
+// ============================
 
+const io = req.app.get("io");
+
+const adminNotification =
+await createNotification(
+
+  null,
+
+  "admin",
+
+  "🛒 New Order",
+
+  `New Order #${order.id} received.`,
+  order.id
+
+);
+
+io.to("admin").emit(
+
+  "admin-notification",
+
+  adminNotification
+
+);
     res.status(201).json({
       success: true,
       message: "Order Created Successfully",
@@ -172,7 +204,6 @@ const fetchAllOrders = async (req, res) => {
 // ==============================
 // UPDATE ORDER STATUS
 // ==============================
-
 const changeOrderStatus = async (req, res) => {
 
   try {
@@ -181,27 +212,74 @@ const changeOrderStatus = async (req, res) => {
 
     const { status } = req.body;
 
-    const updatedOrder = await updateOrderStatus(
-      id,
-      status
+    const updatedOrder =
+      await updateOrderStatus(id, status);
+
+    // ===========================
+    // SAVE NOTIFICATION IN DATABASE
+    // ===========================
+
+    const notification =
+      await createNotification(
+
+        updatedOrder.user_id,
+
+        "📦 Order Update",
+
+        `Your order #${updatedOrder.id} is now ${updatedOrder.order_status}`
+
+      );
+
+    // ===========================
+    // SOCKET.IO
+    // ===========================
+
+    const io = req.app.get("io");
+
+    io.to(`user-${updatedOrder.user_id}`).emit(
+
+      "order-status",
+
+      notification
+
+    );
+
+    console.log(
+
+      "✅ Notification Sent",
+
+      notification
+
     );
 
     res.status(200).json({
+
       success: true,
-      message: "Order status updated successfully",
+
+      message: "Order Updated",
+
       order: updatedOrder
+
     });
 
-  } catch (error) {
+  }
+
+  catch (error) {
+
+    console.log(error);
 
     res.status(500).json({
+
       success: false,
+
       message: error.message
+
     });
 
   }
 
 };
+
 module.exports = {
   createOrder,
   getOrdersByUser,
