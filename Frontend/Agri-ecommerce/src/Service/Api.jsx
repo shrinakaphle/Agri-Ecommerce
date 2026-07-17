@@ -98,4 +98,9 @@ export const verifyOTP = (data) =>
 
 export const resetPassword = (data) =>
   Api.post("/api/password/reset-password", data);
+
+export const sendContact = (data)=>
+
+Api.post("/api/contact/send", data);
+
 export default Api;

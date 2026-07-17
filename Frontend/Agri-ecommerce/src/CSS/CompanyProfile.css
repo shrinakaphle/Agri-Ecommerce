@@ -1,0 +1,553 @@
+/* ===========================
+   COMPANY PAGE
+=========================== */
+
+.company-page{
+
+background:#f8fbf8;
+
+overflow:hidden;
+
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.company-hero{
+
+height:450px;
+
+background:
+linear-gradient(
+rgba(0,0,0,.55),
+rgba(0,0,0,.55)
+),
+url("../assets/company-banner.jpg");
+
+background-size:cover;
+
+background-position:center;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.company-overlay{
+
+text-align:center;
+
+color:white;
+
+}
+
+.company-overlay h1{
+
+font-size:65px;
+
+font-weight:700;
+
+letter-spacing:2px;
+
+margin-bottom:15px;
+
+animation:fadeDown 1s ease;
+
+}
+
+.company-overlay p{
+
+font-size:22px;
+
+animation:fadeUp 1.2s ease;
+
+}
+
+/* ===========================
+INTRO
+=========================== */
+
+.company-intro{
+
+width:85%;
+
+max-width:1000px;
+
+margin:90px auto;
+
+text-align:center;
+
+}
+
+.company-intro h2{
+
+font-size:42px;
+
+color:#1f7a35;
+
+margin-bottom:25px;
+
+position:relative;
+
+}
+
+.company-intro h2::after{
+
+content:"";
+
+width:80px;
+
+height:4px;
+
+background:#8BC34A;
+
+display:block;
+
+margin:15px auto;
+
+border-radius:10px;
+
+}
+
+.company-intro p{
+
+font-size:18px;
+
+line-height:2;
+
+color:#666;
+
+}
+
+/* ===========================
+VISION
+=========================== */
+
+.company-grid{
+
+width:90%;
+
+max-width:1200px;
+
+margin:auto;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+
+gap:35px;
+
+padding-bottom:70px;
+
+}
+
+.company-card{
+
+background:white;
+
+padding:45px;
+
+border-radius:20px;
+
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+transition:.4s;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.company-card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:6px;
+
+background:#2e7d32;
+
+}
+
+.company-card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.company-card h3{
+
+font-size:28px;
+
+color:#1f7a35;
+
+margin-bottom:20px;
+
+}
+
+.company-card p{
+
+color:#666;
+
+line-height:1.9;
+
+}
+
+/* ===========================
+VALUES
+=========================== */
+
+.company-values{
+
+padding:90px 8%;
+
+background:white;
+
+}
+
+.company-values h2{
+
+text-align:center;
+
+font-size:42px;
+
+color:#1f7a35;
+
+margin-bottom:60px;
+
+}
+
+.value-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:30px;
+
+}
+
+.value-box{
+
+background:#f8faf8;
+
+padding:35px;
+
+border-radius:18px;
+
+text-align:center;
+
+transition:.35s;
+
+cursor:pointer;
+
+}
+
+.value-box:hover{
+
+background:#2e7d32;
+
+transform:translateY(-10px);
+
+}
+
+.value-box:hover h3,
+
+.value-box:hover p{
+
+color:white;
+
+}
+
+.value-box h3{
+
+font-size:24px;
+
+margin-bottom:15px;
+
+color:#1f7a35;
+
+transition:.3s;
+
+}
+
+.value-box p{
+
+line-height:1.8;
+
+color:#666;
+
+transition:.3s;
+
+}
+
+/* ===========================
+WHY CHOOSE
+=========================== */
+
+.why-company{
+
+padding:90px 8%;
+
+}
+
+.why-company h2{
+
+text-align:center;
+
+font-size:42px;
+
+color:#1f7a35;
+
+margin-bottom:50px;
+
+}
+
+.why-company ul{
+
+max-width:800px;
+
+margin:auto;
+
+list-style:none;
+
+}
+
+.why-company li{
+
+background:white;
+
+padding:20px 30px;
+
+margin-bottom:18px;
+
+border-left:6px solid #2e7d32;
+
+border-radius:12px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.06);
+
+font-size:18px;
+
+transition:.3s;
+
+}
+
+.why-company li:hover{
+
+transform:translateX(10px);
+
+}
+
+/* ===========================
+ANIMATION
+=========================== */
+
+@keyframes fadeDown{
+
+from{
+
+opacity:0;
+
+transform:translateY(-60px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(60px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===========================
+RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.company-overlay h1{
+
+font-size:42px;
+
+}
+
+.company-overlay p{
+
+font-size:18px;
+
+}
+
+.company-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.company-card{
+
+padding:30px;
+
+}
+
+.company-intro h2,
+
+.company-values h2,
+
+.why-company h2{
+
+font-size:32px;
+
+}
+
+}
+/* ===========================
+CTA SECTION
+=========================== */
+
+.company-cta{
+
+margin:100px auto 0;
+
+padding:80px 40px;
+
+background:linear-gradient(135deg,#1f7a35,#3fa34d);
+
+text-align:center;
+
+color:white;
+
+border-radius:25px;
+
+width:90%;
+
+max-width:1200px;
+
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.company-cta h2{
+
+font-size:42px;
+
+margin-bottom:20px;
+
+}
+
+.company-cta p{
+
+font-size:18px;
+
+max-width:750px;
+
+margin:auto;
+
+line-height:1.8;
+
+margin-bottom:40px;
+
+opacity:.95;
+
+}
+
+.cta-buttons{
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+.cta-buttons button{
+
+padding:15px 35px;
+
+font-size:17px;
+
+border:none;
+
+border-radius:50px;
+
+cursor:pointer;
+
+transition:.35s;
+
+font-weight:600;
+
+}
+
+.cta-buttons button:first-child{
+
+background:white;
+
+color:#1f7a35;
+
+}
+
+.cta-buttons button:first-child:hover{
+
+transform:translateY(-5px);
+
+}
+
+.secondary-btn{
+
+background:transparent;
+
+border:2px solid white !important;
+
+color:white;
+
+}
+
+.secondary-btn:hover{
+
+background:white;
+
+color:#1f7a35;
+
+transform:translateY(-5px);
+
+}

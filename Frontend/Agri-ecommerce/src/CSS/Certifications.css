@@ -1,0 +1,356 @@
+/* ===========================
+   CERTIFICATION PAGE
+=========================== */
+
+.certificate-page{
+    width:100%;
+    background:#f8faf8;
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.certificate-hero{
+
+    height:380px;
+
+    background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+    #1f7a35;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.certificate-overlay{
+
+    text-align:center;
+    color:white;
+
+}
+
+.certificate-overlay h1{
+
+    font-size:55px;
+    font-weight:700;
+    margin-bottom:10px;
+
+}
+
+.certificate-overlay p{
+
+    font-size:20px;
+    letter-spacing:1px;
+
+}
+
+/* ===========================
+   HEADING
+=========================== */
+
+.certificate-heading{
+
+    width:85%;
+    max-width:900px;
+    margin:70px auto 50px;
+    text-align:center;
+
+}
+
+.certificate-heading h2{
+
+    color:#1f7a35;
+    font-size:38px;
+    margin-bottom:15px;
+
+}
+
+.certificate-heading p{
+
+    color:#666;
+    line-height:1.8;
+    font-size:17px;
+
+}
+
+/* ===========================
+   GRID
+=========================== */
+
+.certificate-container{
+
+    width:90%;
+    max-width:1300px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:35px;
+
+    padding-bottom:80px;
+
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.certificate-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.certificate-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+.certificate-image{
+
+    height:240px;
+
+    overflow:hidden;
+
+}
+
+.certificate-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.4s;
+
+}
+
+.certificate-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+/* ===========================
+   CONTENT
+=========================== */
+
+.certificate-content{
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+.certificate-content h3{
+
+    color:#222;
+
+    margin-bottom:12px;
+
+    font-size:23px;
+
+}
+
+.certificate-content p{
+
+    color:#666;
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
+}
+
+.certificate-content button{
+
+    background:#1f7a35;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:15px;
+
+}
+
+.certificate-content button:hover{
+
+    background:#145425;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.certificate-hero{
+
+height:280px;
+
+}
+
+.certificate-overlay h1{
+
+font-size:38px;
+
+}
+
+.certificate-heading h2{
+
+font-size:30px;
+
+}
+
+}
+/* ===========================
+   POPUP
+=========================== */
+
+.certificate-popup{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.75);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999;
+
+padding:20px;
+
+}
+
+.certificate-popup-content{
+
+background:white;
+
+border-radius:15px;
+
+max-width:700px;
+
+width:100%;
+
+padding:25px;
+
+text-align:center;
+
+position:relative;
+
+animation:popup .3s ease;
+
+}
+
+.certificate-popup-content img{
+
+width:100%;
+
+max-height:450px;
+
+object-fit:contain;
+
+margin-bottom:20px;
+
+}
+
+.certificate-popup-content h2{
+
+color:#1f7a35;
+
+margin-bottom:10px;
+
+}
+
+.certificate-popup-content p{
+
+color:#666;
+
+line-height:1.7;
+
+}
+
+.close-btn{
+
+position:absolute;
+
+top:15px;
+
+right:20px;
+
+font-size:35px;
+
+cursor:pointer;
+
+color:#555;
+
+}
+
+.close-btn:hover{
+
+color:red;
+
+}
+
+@keyframes popup{
+
+from{
+
+transform:scale(.8);
+
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+}

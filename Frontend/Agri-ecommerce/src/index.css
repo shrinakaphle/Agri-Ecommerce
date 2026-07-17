@@ -59,74 +59,6 @@ body {
    animation: drop 0.3s ease;
 }
 
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 80px 60px;
-  width:100%;
-  min-height:200vh;
-  overflow:hidden;
-   position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-top:80px;
-}
-
-.hero-left {
-  width: 50%;
-  z-index:2;
-}
-
-.hero-left h1 {
-  font-size: 55px;
-  margin-bottom: 20px;
-  line-height:1.2;
-  color:#1b1b1b;
-}
-
-.hero-left p {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color:#555;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 20px;
-}
-.arrow{
-   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  cursor: pointer;
-}
-
-.learn-btn {
-  border: 1px solid #2e7d32;
-  background: transparent;
-  padding: 14px 28px;
-  border-radius: 8px;
-  font: size 16px;
-  cursor:pointer;
-}
-
-.hero-right img {
-  width:100%;
-  border-radius: 20px;
-  max-width:400px;
-  height: 400px;
-  object-fit:cover;
-  border-radius:30px;
-  
-}
-.hero-slider {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-}
-
 
 
  .categories {
@@ -186,74 +118,6 @@ body {
   padding: 10px 20px;
   border-radius: 8px;
 }
-
-.hero-slider {
-  position: relative;
-  height: 90vh;
-  width: 100%;
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: 1s ease-in-out;
-  transform: scale(1.05);
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index:1;
-}
-
-.hero-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-}
-
-.hero-content h1 {
-  font-size: 50px;
-}
-
-.hero-content p {
-  font-size: 20px;
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
-  font-size: 30px;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 50%;
-  color: white;
-}
-
-.left {
-  left: 20px;
-}
-
-.right {
-  right: 20px;
-}
-
 /* WHAT WE DO SECTION */
 .whatwedo {
   padding: 100px 60px;
@@ -426,72 +290,6 @@ body {
 }
 
 /* Industry Section */
-.industry {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 80px 60px;
-  gap: 40px;
-}
-
-.industry-text {
-  width: 50%;
-  animation:bounceIn 1.5s ease;
-}
-
-.industry-text h2 {
-  font-size: 35px;
-  margin-bottom: 20px;
-  color: #2e7d32;
-}
-
-.industry-text p {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #444;
-}
-
-.industry-images {
-  width: 50%;
-  display: flex;
-  gap: 20px;
-}
-
-.industry-images img {
-  width: 50%;
-  border-radius: 15px;
-  object-fit: cover;
-  cursor:pointer;
-  transition:transofrm 0.8s ease,box-shadow 0,5s ease;
-}
-
-.industry-images img:hover{
-  transform:scale(1.08) translateY(-10PX);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-
-}
-/*Bounce coming animation*/
-@keyframes bounceIn {
-
-  0% {
-    opacity: 0;
-    transform: scale(0.3) translateY(-100px);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.05) translateY(20px);
-  }
-
-  70% {
-    transform: scale(0.95) translateY(-10px);
-  }
-
-  100% {
-    transform: scale(1) translateY(0);
-  }
-}
-
 
 .footer {
   background: #023315;
@@ -584,28 +382,7 @@ body {
    font-size:18px;
 }
 
-/* .explore-btn {
-  background: linear-gradient(135deg, #1b8f3a, #4caf50);
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 50px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-}
 
-.explore-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5);
-}
-
-.explore-btn:active {
-  transform: translateY(0);
-}
- */
 
  .explore-btn {
   background: #2e7d32;
@@ -640,9 +417,6 @@ body {
   background: #1b5e20;
   transform: scale(1.05);
 }
-
-
-
 
 /* Main Page */
 

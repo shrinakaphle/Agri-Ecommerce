@@ -1,0 +1,171 @@
+.hero-slider {
+  position: relative;
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: 1s ease-in-out;
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+
+  pointer-events: none;   /* ADD THIS */
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+
+  z-index: 5;   /* ADD THIS */
+}
+.hero-btn{
+
+    margin-top:25px;
+
+    padding:14px 35px;
+
+    border:none;
+
+    border-radius:40px;
+
+    background:#2e7d32;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    position:relative;
+
+    z-index:6;
+
+    transition:.3s;
+
+}
+
+.hero-btn:hover{
+
+    background:#1b5e20;
+
+}
+
+.hero-content h1 {
+  font-size: 50px;
+}
+
+.hero-content p {
+  font-size: 20px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  font-size: 30px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  color: white;
+}
+
+.left {
+  left: 20px;
+}
+
+.right {
+  right: 20px;
+}
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 60px;
+  width:100%;
+  min-height:200vh;
+  overflow:hidden;
+   position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top:80px;
+}
+
+.hero-left {
+  width: 50%;
+  z-index:2;
+}
+
+.hero-left h1 {
+  font-size: 55px;
+  margin-bottom: 20px;
+  line-height:1.2;
+  color:#1b1b1b;
+}
+
+.hero-left p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color:#555;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+.arrow{
+   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.learn-btn {
+  border: 1px solid #2e7d32;
+  background: transparent;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font: size 16px;
+  cursor:pointer;
+}
+
+.hero-right img {
+  width:100%;
+  border-radius: 20px;
+  max-width:400px;
+  height: 400px;
+  object-fit:cover;
+  border-radius:30px;
+  
+}
+.hero-slider {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+

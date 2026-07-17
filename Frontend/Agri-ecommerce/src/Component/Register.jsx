@@ -5,6 +5,7 @@ import {useNavigate}from "react-router-dom";
 import {registerUser}from "../Service/Api";
 
 import "../CSS/Register.css";
+import { toast } from "react-toastify";
 
 const Register = ()=>{const navigate =useNavigate();
 
@@ -18,7 +19,7 @@ const handleSubmit =async(e)=>{e.preventDefault();
 
 if(formData.password !==formData.confirmPassword){
 
-alert("Passwords do not match");
+toast.error("Passwords do not match");
 
 return;
 
@@ -33,9 +34,13 @@ email:formData.email,
 phone:formData.phone,
 password:formData.password});
 
-alert(response.data.message);
+toast.success(response.data.message);
 
-navigate("/login");
+setTimeout(() => {
+
+  navigate("/login");
+
+}, 1200);
 
 }
 
@@ -43,8 +48,13 @@ catch(error){
 
 console.log(error);
 
-alert("Registration Failed");
+toast.error(
 
+  error.response?.data?.message ||
+
+  "Registration Failed"
+
+);
 }
 
 };

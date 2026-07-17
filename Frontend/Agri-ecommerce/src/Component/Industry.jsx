@@ -1,10 +1,10 @@
 
 import ourexcellence from "../assets/ourexcellence.png"
-
+import "../CSS/industry.css"
 
 const Industry = () => {
   return (
-    <section className="industry">
+    <section className="industry" data-aos="flip-left">
 
       <div className="industry-text">
         <h2>Our Manufacturing Excellence</h2>

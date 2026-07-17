@@ -18,7 +18,7 @@ const navigate =useNavigate();
   }, []);
 
   return (
-    <section className="categories">
+    <section className="categories"data-aos="zoom-in-up">
       <h2>Shop By Categories</h2>
 
       <div className="category-grid">

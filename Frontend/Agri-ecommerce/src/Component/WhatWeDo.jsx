@@ -29,10 +29,10 @@ const WhatWeDo = () => {
   ];
 
   return (
-    <section className="whatwedo">
+    <section className="whatwedo"data-aos="zoom-in-up">
 
       {/* TITLE */}
-      <div className="whatwedo-title">
+      <div className="whatwedo-title" data-aos="fade-left">
         <h2>What We Do</h2>
         <p>
           Amarsiddhi Krishi Udhyog provides premium livestock nutrition solutions

@@ -1,6 +1,6 @@
 //  import logo from "../assets/logo.jpeg";
 import {useEffect,useState} from "react";
-import{NavLink} from "react-router-dom";
+import{NavLink,Link} from "react-router-dom";
 import{FaHeart,FaShoppingCart,FaBell} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
 import{FaUserCircle,FaChevronDown} from "react-icons/fa";
@@ -282,15 +282,26 @@ isActive ? "nav-item active-nav" : "nav-item"
         </NavLink>
     </li>
 
-    <li>
-        <NavLink to="/about"
-        className={({isActive})=>
-isActive ? "nav-item active-nav" : "nav-item"
-}
->
-            About
-        </NavLink>
-    </li>
+   <li className="dropdown">
+  <span className="dropbtn">
+    About ▾
+  </span>
+
+  <ul className="dropdown-content">
+    <li><Link to="/about/company">Company</Link></li>
+    <li><Link to="/about/profile">Company Profile</Link></li>
+    <li><Link to="/about/certifications">Certifications</Link></li>
+   <li>
+
+<NavLink to="/about/team">
+
+Our Team
+
+</NavLink>
+
+</li>
+  </ul>
+</li>
 
     <li>
         <NavLink to="/contact"

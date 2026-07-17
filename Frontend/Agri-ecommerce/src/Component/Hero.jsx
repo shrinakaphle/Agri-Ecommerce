@@ -8,40 +8,51 @@ import slide4 from "../assets/domestic.png";
 import slide5 from "../assets/delivery.png";
 
 
-import "../index.css";
 
+import "../CSS/Hero.css";
 
-  const slides = [
-    {
-      image: slide1,
-      title: "Welcome to Amarsiddhi Krishi Udhyog",
-      desc: "Premium Animal Feed for Healthy Livestock",
-    },
+const slides = [
+  {
+    image: slide1,
+    title: "Welcome to Amarsiddhi Krishi Udhyog",
+    desc: "Premium Animal Feed for Healthy Livestock",
+    button: "Explore Products",
+    link: "/products",
+  },
 
-    {
-      image: slide2,
-      title: "High Quality Feed Products",
-      desc: "Nutrition solutions for cows, buffalo, and poultry",
-    },
+  {
+    image: slide2,
+    title: "High Quality Feed Products",
+    desc: "Nutrition solutions for cows, buffalo, and poultry",
+    button: "View Products",
+    link: "/products",
+  },
 
-    {
-      image: slide3,
-      title: "Trusted By Farmers",
-      desc: "Improving livestock health across Nepal",
-    },
+  {
+    image: slide3,
+    title: "Trusted By Farmers",
+    desc: "Improving livestock health across Nepal",
+    button: "Contact Us",
+    link: "/contact",
+  },
 
-    {
-      image: slide4,
-      title: "Premium Feeds & Supplements Tailored for Animals",
-      desc: "Healthy nutrition for better livestock growth",
-    },
+  {
+    image: slide4,
+    title: "Premium Feeds & Supplements Tailored for Animals",
+    desc: "Healthy nutrition for better livestock growth",
+    button: "About Us",
+    link: "/about/company",
+  },
 
-    {
-      image: slide5,
-      title: "Reliable & Fast Delivery",
-      desc: "Fast delivery service across Nepal",
-    },
-  ];
+  {
+    image: slide5,
+    title: "Reliable & Fast Delivery",
+    desc: "Contact us for quick delivery across Nepal",
+    button: "Contact Us",
+    link: "/contact",
+  },
+];
+  
   const Hero =()=>{
     const navigate =useNavigate();
 
@@ -92,11 +103,12 @@ useEffect(() => {
         <h1>{slides[current].title}</h1>
         <p>{slides[current].desc}</p>
 
-        <button className="hero-btn">
-           onClick={() => navigate ("/products")}
-         Contact Us
-        
-        </button>
+       <button
+  className="hero-btn"
+  onClick={() => navigate(slides[current].link)}
+>
+  {slides[current].button}
+</button>
       </div>
 
       {/* LEFT ARROW */}

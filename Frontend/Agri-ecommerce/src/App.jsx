@@ -22,7 +22,11 @@ import "react-toastify/dist/ReactToastify.css";
 import ForgotPassword from "./Pages/ForgotPassword";
 import VerifyOTP from "./Pages/VerifyOTP";
 import ResetPassword from "./Pages/ResetPassword";
-
+import Company from "./pages/Company";
+import CompanyProfile from "./pages/CompanyProfile";
+import Certifications from "./pages/Certifications";
+import OurTeam from "./pages/OurTeam";
+import Contact from "./pages/Contact";
 // Admin Side //
 import Dashboard from "./Admin/Pages/Dashboard";
 import ProtectedAdminRoute from "./Admin/ProtectedAdminRoute";
@@ -199,8 +203,14 @@ element={<VerifyOTP/>}
 path="/reset-password"
 element={<ResetPassword/>}
 />
-
-
+<Route path="/about/company" element={<Company />} />
+<Route path="/about/profile" element={<CompanyProfile />} />
+<Route path="/about/certifications" element={<Certifications />} />
+<Route
+path="/about/team"
+element={<OurTeam/>}
+/>
+<Route path="/contact" element={<Contact />} />
 
 //Admin part
 
