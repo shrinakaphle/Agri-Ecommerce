@@ -18,6 +18,8 @@ const orderRoutes =require("./route/OrderRoutes");
 const analyticsRoutes =require("./route/AnalyticsRoute");
 const notificationRoutes=require("./route/NotificationRoute");
 const passwordRoutes =require("./route/PasswordResetRoute");
+const contactRoutes = require("./route/contactRoutes");
+
 
 
 app.use(cors());
@@ -31,6 +33,7 @@ app.use("/api/order",orderRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/notification",notificationRoutes);
 app.use("/api/password",passwordRoutes);
+app.use("/api/contact", contactRoutes);
 app.get("/",(req,res)=>{ 
     console.log('server is running')     
     res.send("Backend is running");
