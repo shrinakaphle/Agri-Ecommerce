@@ -245,13 +245,8 @@ const bannerTitle =
 
     // <div className="products-page">
     <div
-  className="products-page"
-  style={{
-    display: "block",
-    width: "100%",
-    maxWidth: "1400px",
-    margin: "0 auto"
-  }}
+  className="products-wrapper"
+ 
 >
     
 
