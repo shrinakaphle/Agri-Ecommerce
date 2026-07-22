@@ -6,8 +6,8 @@ FaEye,
 } from "react-icons/fa";
 import company1 from "../assets/company1.jpeg";
  import company2 from "../assets/company2.jpeg";
-// import company3 from "../assets/company/company3.jpg";
-// import company4 from "../assets/company/company4.jpg";
+ import company3 from "../assets/company3.jpeg";
+ import company4 from "../assets/company4.jpeg";
 // import company5 from "../assets/company/company5.jpg";
 // import company6 from "../assets/company/company6.jpg";
 // import company7 from "../assets/company/company7.jpg";
@@ -21,21 +21,55 @@ const Company = () => {
 
       {/* Hero */}
 
-      <div className="company-hero" data-aos = "flip-left">
+      {/* ================= HERO ================= */}
 
-        <div className="company-overlay">
+<div className="company-hero"
+style={{
+    backgroundImage: `linear-gradient(rgba(18,50,22,.70), rgba(0,0,0,.60)), url(${company1})`
+  }}>
 
-          <h1>ABOUT THE COMPANY</h1>
+    <div className="company-overlay">
 
-          <p>
+        <div className="hero-logo">
 
-            High Quality Animal Feed For Every Farm
-
-          </p>
+            <img
+                src={company1}
+                alt="Company Logo"
+            />
 
         </div>
 
-      </div>
+        <h5 className="hero-small-title">
+            PREMIUM ANIMAL FEED MANUFACTURER
+        </h5>
+
+        <h1>
+            ABOUT THE
+            <br />
+            COMPANY
+        </h1>
+
+        <div className="hero-divider"></div>
+
+        <p>
+
+            Building Better Nutrition For Every Farm.
+
+            <br />
+
+            Trusted by Thousands of Farmers Across Nepal.
+
+        </p>
+
+        {/* <button className="hero-company-btn">
+
+            Explore Products
+
+        </button> */}
+
+    </div>
+
+</div>
 
       {/* Gallery */}
 
@@ -48,11 +82,11 @@ const Company = () => {
 
   <img src={company2} alt="Factory" />
 
-{/* <img src={company3} alt="Factory" />
+ <img src={company3} alt="Factory" />
 
 <img src={company4} alt="Factory" />
 
-<img src={company5} alt="Factory" />
+{/* <img src={company5} alt="Factory" />
 
 <img src={company6} alt="Factory" />
 
@@ -60,7 +94,7 @@ const Company = () => {
 
 <img src={company8} alt="Factory" />
 
-<img src={company9} alt="Factory" />   */}
+<img src={company9} alt="Factory" />    */}
 
 </div>
         

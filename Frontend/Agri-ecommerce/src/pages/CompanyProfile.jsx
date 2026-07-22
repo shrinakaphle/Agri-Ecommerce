@@ -1,4 +1,5 @@
 import "../CSS/CompanyProfile.css";
+import companyImage from "../assets/companyprofilebanner.jpg";
 
 const CompanyProfile = () => {
 
@@ -8,21 +9,28 @@ const CompanyProfile = () => {
 
       {/* Hero */}
 
-      <section className="company-hero"data-aos="flip-left">
+      <section className="company-hero" data-aos="flip-left">
+ <img 
+    src={companyImage} 
+    alt="Amarsiddhi Krishi Udhyog"
+    className="company-bg-image"
+  />
+    <div className="company-overlay">
 
-        <div className="company-overlay">
+        <h4>AMARSIDDHI KRISHI UDHYOG</h4>
 
-          <h1>Company Profile</h1>
+        <h1>Company Profile</h1>
 
-          <p>
+        <p>
 
-            Growing Agriculture Through Quality Feed Products
+            Growing Agriculture Through Quality Feed Products,
+            Innovation, Sustainability and Farmer Success.
 
-          </p>
+        </p>
 
-        </div>
+    </div>
 
-      </section>
+</section>
 
       {/* Introduction */}
 

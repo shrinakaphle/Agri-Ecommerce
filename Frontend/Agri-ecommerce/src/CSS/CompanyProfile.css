@@ -11,61 +11,143 @@ overflow:hidden;
 }
 
 /* ===========================
-   HERO
+   COMPANY PROFILE HERO
 =========================== */
 
 .company-hero{
 
-height:450px;
+    height:90vh;
 
-background:
-linear-gradient(
-rgba(0,0,0,.55),
-rgba(0,0,0,.55)
-),
-url("../assets/company-banner.jpg");
+    position:relative;
 
-background-size:cover;
+    display:flex;
 
-background-position:center;
+    justify-content:center;
 
-display:flex;
+    align-items:center;
 
-justify-content:center;
+    background:
+    linear-gradient(
+    rgba(18,70,35,.55),
+    rgba(10,35,18,.65)
+    ),
+    url("../assets/companyprofilebanner.jpg");
 
-align-items:center;
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    overflow:hidden;
 
 }
+
+/* =========================== */
 
 .company-overlay{
 
-text-align:center;
+    width:90%;
 
-color:white;
+    max-width:900px;
+
+    text-align:center;
+
+    color:white;
+
+    animation:heroFade 1.2s ease;
 
 }
+
+/* =========================== */
 
 .company-overlay h1{
 
-font-size:65px;
+    font-size:72px;
 
-font-weight:700;
+    font-weight:800;
 
-letter-spacing:2px;
+    letter-spacing:2px;
 
-margin-bottom:15px;
+    margin-bottom:20px;
 
-animation:fadeDown 1s ease;
+    text-shadow:0 8px 18px rgba(0,0,0,.35);
 
 }
+.company-overlay h4{
+
+    color:#b7ff8f;
+
+    letter-spacing:5px;
+
+    margin-bottom:20px;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    text-transform:uppercase;
+
+}
+/* =========================== */
 
 .company-overlay p{
 
-font-size:22px;
+    font-size:23px;
 
-animation:fadeUp 1.2s ease;
+    line-height:1.8;
+
+    margin-bottom:40px;
+
+    opacity:.95;
 
 }
+
+/* =========================== */
+
+.company-overlay::after{
+
+    content:"";
+
+    display:block;
+
+    width:140px;
+
+    height:5px;
+
+    background:#9cff57;
+
+    margin:35px auto 0;
+
+    border-radius:50px;
+
+}
+
+/* =========================== */
+
+@keyframes heroFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(70px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+
 
 /* ===========================
 INTRO
